@@ -27,14 +27,6 @@ const services = [
     img: "https://images.unsplash.com/photo-1555252333-978fe3c7e834?q=80&w=1000",
     desc: "면역력이 약한 신생아와 반려동물 모두가 안전하게 생활할 수 있는 환경을 만드는 특별한 프리미엄 청소입니다.",
     features: ["오존 살균 시공", "신생아방 집중 케어", "알레르기 유발물질 완벽 제거", "쿠션매트 세척 및 소독"]
-  },
-  {
-    id: "rainbow",
-    title: "무지개청소",
-    subtitle: "사랑하는 아이와의 마지막 인사",
-    img: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1000",
-    desc: "반려동물이 무지개 다리를 건넌 후, 남겨진 공간의 흔적과 냄새를 정성스럽게 정리하며 공간을 복원해 드립니다.",
-    features: ["특수 탈취 (부패취 중화)", "오존 장시간 정밀 시공", "공간 복원 및 심층 클리닝", "보호자를 위한 섬세한 마무리"]
   }
 ];
 
@@ -42,7 +34,7 @@ export default function HomeCleaningPage() {
   return (
     <div className="container section">
       <h1 className="section-title">집청소 서비스</h1>
-      <p className="page-desc">반려동물 가정의 라이프스타일에 맞춘 4가지 특화 서비스를 제공합니다.</p>
+      <p className="page-desc">반려동물 가정의 라이프스타일에 맞춘 3가지 특화 서비스를 제공합니다.</p>
 
       <div className="services-list">
         {services.map((s, i) => (
