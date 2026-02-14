@@ -2,179 +2,279 @@
 
 import Hero from "@/components/Hero";
 import Link from "next/link";
-import { Dog, ShieldCheck, Zap, UserCheck, ArrowRight } from "lucide-react";
+import {
+  House,
+  Truck,
+  Store,
+  Paintbrush,
+  Sparkles,
+  ArrowRight,
+  MessageSquareText,
+  Calculator
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const highlightItems = [
-    { icon: <Dog size={40} />, title: "반려동물 전문", desc: "펫 전용 특화 서비스 및 털 제거 노하우" },
-    { icon: <ShieldCheck size={40} />, title: "친환경 살균", desc: "안전한 친환경 세제와 냄새 원인 제거" },
-    { icon: <Zap size={40} />, title: "프리미엄 장비", desc: "컬비, 미코플러 등 업계 최고급 전문 장비" },
-    { icon: <UserCheck size={40} />, title: "전문 인력", desc: "철저한 교육을 이수한 숙련된 전문가 투입" },
-  ];
-
   const services = [
-    { name: "이사청소", href: "/home-cleaning", img: "https://images.unsplash.com/photo-1544450173-8c87998d5f31?q=80&w=1000", desc: "새로운 시작을 위한 완벽한 공간 케어" },
-    { name: "거주청소", href: "/home-cleaning", img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=1000", desc: "함께 숨 쉬는 공간을 더 깨끗하게" },
-    { name: "아기맞이청소", href: "/home-cleaning", img: "https://images.unsplash.com/photo-1545659819-76dec714778a?q=80&w=1000", desc: "신생아와 반려동물의 안전을 위한 선택" },
-    { name: "상가청소", href: "/commercial-cleaning", img: "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?q=80&w=1000", desc: "애견카페, 동물병원 위생 전문 관리" },
+    { id: "moving-in", name: "입주청소", desc: "새로운 출발의 시작!", icon: <House size={40} /> },
+    { id: "moving-out", name: "이사청소", desc: "새로운 공간, 깔끔한 시작!", icon: <Truck size={40} /> },
+    { id: "commercial", name: "상가청소", desc: "비즈니스 공간의 쾌적한 시작!", icon: <Store size={40} /> },
+    { id: "interior", name: "인테리어청소", desc: "인테리어 후, 완벽한 마무리!", icon: <Paintbrush size={40} /> },
+    { id: "special", name: "특수청소", desc: "전문 기술, 완벽한 해결!", icon: <Sparkles size={40} /> },
   ];
 
   return (
     <>
       <Hero />
 
-      {/* Highlights Section */}
-      <section className="section bg-white">
+      {/* Professional Service Intro Section */}
+      <section className="section bg-white introduction-section">
         <div className="container">
-          <div className="highlights-grid">
-            {highlightItems.map((item, index) => (
-              <div key={index} className="highlight-card">
-                <div className="icon">{item.icon}</div>
-                <h3>{item.title}</h3>
+          <h2 className="section-title centered">전문 청소 소개</h2>
+          <div className="services-illustration-grid">
+            {services.map((item) => (
+              <div key={item.id} className="service-illust-card">
+                <div className="illust-wrap">
+                  <div className="illust-icon">{item.icon}</div>
+                </div>
+                <h3>{item.name}</h3>
                 <p>{item.desc}</p>
+                <Link href="/home-cleaning" className="btn-detail-mini">자세히보기</Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title">멍크린 토탈 케어 서비스</h2>
-          <div className="services-grid">
-            {services.map((item, index) => (
-              <Link href={item.href} key={index} className="service-card">
-                <div className="service-img" style={{ backgroundImage: `url(${item.img})` }}></div>
-                <div className="service-info">
-                  <h3>{item.name}</h3>
-                  <p>{item.desc}</p>
-                  <span className="learn-more">자세히 보기 <ArrowRight size={16} /></span>
-                </div>
-              </Link>
-            ))}
+      {/* Professional Info Section (Person with Tablet) */}
+      <section className="info-promo-section">
+        <div className="container info-promo-container">
+          <div className="info-text-side">
+            <h2>고객님의 쾌적한 환경을 위해<br />언제나 최선을 다하는 청소 전문 업체</h2>
+            <p>
+              최신 청소 기법과 장비를 도입하여 다양한 청소 서비스를 제공하며,<br />
+              고객님의 필요에 맞춘 맞춤형 서비스를 제공합니다.<br />
+              멍크린은 항상 완벽한 청소 결과를 약속합니다.
+            </p>
+            <Link href="/about" className="btn btn-primary btn-more">
+              더보기 <ArrowRight size={18} />
+            </Link>
+          </div>
+          <div className="info-image-side">
+            <div className="promo-image-box">
+              <img
+                src="https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?q=80&w=1000"
+                alt="Professional cleaner with tablet"
+                className="promo-img"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-box">
-            <h2>지금 우리 아이를 위한 청소 상담을 받아보세요</h2>
-            <p>전문 상담사가 직접 방문하여 정확한 견적과 최적의 청소 솔루션을 제안해 드립니다.</p>
-            <Link href="/estimate" className="btn btn-primary btn-lg">간편 견적 신청하기</Link>
-          </div>
+      {/* Bottom Quick Links */}
+      <section className="section bottom-links-section">
+        <div className="container bottom-links-grid">
+          <Link href="/reviews" className="bottom-card">
+            <div className="bottom-card-content">
+              <h3>청소후기</h3>
+              <p>직접 읽어봐야 할 실제 후기!</p>
+              <span className="link-action">자세히보기 <ArrowRight size={16} /></span>
+            </div>
+            <div className="bottom-card-icon">
+              <MessageSquareText size={48} />
+            </div>
+          </Link>
+          <Link href="/estimate" className="bottom-card">
+            <div className="bottom-card-content">
+              <h3>간편 견적</h3>
+              <p>간편 견적으로 빠르게 비용을 확인하세요!</p>
+              <span className="link-action">문의하기 <ArrowRight size={16} /></span>
+            </div>
+            <div className="bottom-card-icon">
+              <Calculator size={48} />
+            </div>
+          </Link>
         </div>
       </section>
 
       <style jsx>{`
-        .highlights-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 30px;
-        }
-        .highlight-card {
-          padding: 40px;
-          background: #fff;
-          border-radius: 20px;
+        .centered {
           text-align: center;
-          transition: all 0.3s ease;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-          border: 1px solid rgba(0, 0, 0, 0.05);
+          font-weight: 800;
+          margin-bottom: 60px;
         }
-        .highlight-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(255, 140, 66, 0.1);
-          border-color: rgba(255, 140, 66, 0.2);
+        
+        /* Service Illustration Grid */
+        .services-illustration-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 20px;
         }
-        .highlight-card .icon {
-          color: var(--primary);
+        .service-illust-card {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .illust-wrap {
+          width: 140px;
+          height: 140px;
+          background-color: #f8f9fa;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-bottom: 20px;
+          border: 1px solid #eee;
+          transition: all 0.3s ease;
         }
-        .highlight-card h3 {
-          font-size: 1.4rem;
+        .service-illust-card:hover .illust-wrap {
+          background-color: #fff;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+          transform: translateY(-5px);
+        }
+        .illust-icon {
+          color: var(--primary);
+        }
+        .service-illust-card h3 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          margin-bottom: 5px;
+        }
+        .service-illust-card p {
+          font-size: 0.85rem;
+          color: #777;
           margin-bottom: 15px;
-          color: var(--dark-bg);
         }
-        .highlight-card p {
-          color: var(--text-secondary);
-          line-height: 1.6;
+        .btn-detail-mini {
+          font-size: 0.75rem;
+          background-color: #bbb;
+          color: #fff;
+          padding: 4px 12px;
+          border-radius: 4px;
+          font-weight: 600;
+        }
+        .btn-detail-mini:hover {
+          background-color: var(--primary);
         }
 
-        .services-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 30px;
+        /* Info Promo Section */
+        .info-promo-section {
+          background-color: #f5f5f5;
+          padding: 100px 0;
+          overflow: hidden;
         }
-        .service-card {
-          background: #fff;
+        .info-promo-container {
+          display: flex;
+          align-items: center;
+          gap: 60px;
+        }
+        .info-text-side {
+          flex: 1;
+        }
+        .info-text-side h2 {
+          font-size: 2.2rem;
+          font-weight: 800;
+          line-height: 1.3;
+          margin-bottom: 25px;
+          color: #333;
+        }
+        .info-text-side p {
+          font-size: 1.05rem;
+          color: #666;
+          line-height: 1.7;
+          margin-bottom: 40px;
+        }
+        .btn-more {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 35px;
+          border-radius: 50px;
+        }
+        .info-image-side {
+          flex: 1.2;
+          position: relative;
+        }
+        .promo-image-box {
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+          transform: rotate(2deg);
+        }
+        .promo-img {
+          width: 100%;
+          display: block;
+        }
+
+        /* Bottom Quick Links */
+        .bottom-links-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 30px;
+        }
+        .bottom-card {
+          background-color: #fff;
+          border: 1px solid #eee;
+          padding: 40px;
+          border-radius: 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           transition: all 0.3s ease;
         }
-        .service-card:hover {
-          transform: scale(1.02);
+        .bottom-card:hover {
+          box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+          transform: translateY(-5px);
+          border-color: var(--primary);
         }
-        .service-img {
-          height: 220px;
-          background-size: cover;
-          background-position: center;
-        }
-        .service-info {
-          padding: 30px;
-        }
-        .service-info h3 {
+        .bottom-card-content h3 {
           font-size: 1.5rem;
+          font-weight: 800;
           margin-bottom: 10px;
-          color: var(--dark-bg);
         }
-        .service-info p {
-          color: var(--text-secondary);
-          margin-bottom: 20px;
+        .bottom-card-content p {
           font-size: 0.95rem;
+          color: #777;
+          margin-bottom: 20px;
         }
-        .learn-more {
+        .link-action {
+          color: var(--primary);
+          font-weight: 700;
           display: flex;
           align-items: center;
           gap: 5px;
+        }
+        .bottom-card-icon {
+          color: #ddd;
+          transition: color 0.3s ease;
+        }
+        .bottom-card:hover .bottom-card-icon {
           color: var(--primary);
-          font-weight: 700;
-          font-size: 0.9rem;
+          opacity: 0.2;
         }
 
-        .cta-section {
-          padding: 100px 0;
-          background-color: var(--background);
+        @media (max-width: 1024px) {
+          .services-illustration-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+          }
         }
-        .cta-box {
-          background: var(--dark-bg);
-          padding: 80px 40px;
-          border-radius: 40px;
-          text-align: center;
-          color: #fff;
-        }
-        .cta-box h2 {
-          font-size: 2.5rem;
-          margin-bottom: 20px;
-        }
-        .cta-box p {
-          font-size: 1.2rem;
-          opacity: 0.8;
-          margin-bottom: 40px;
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .btn-lg {
-          padding: 18px 40px;
-          font-size: 1.2rem;
-        }
-
         @media (max-width: 768px) {
-          .cta-box h2 { font-size: 1.8rem; }
-          .cta-box { padding: 50px 20px; }
+          .info-promo-container {
+            flex-direction: column;
+            text-align: center;
+          }
+          .services-illustration-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .bottom-links-grid {
+            grid-template-columns: 1fr;
+          }
+          .info-text-side h2 {
+            font-size: 1.6rem;
+          }
         }
       `}</style>
     </>

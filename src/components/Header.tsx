@@ -5,80 +5,84 @@ import { useState, useEffect } from "react";
 import { Menu, X, Smartphone } from "lucide-react";
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    const navItems = [
-        { name: "멍크린 소개", href: "/about" },
-        { name: "집청소", href: "/home-cleaning" },
-        { name: "상가청소", href: "/commercial-cleaning" },
-        { name: "고객후기", href: "/reviews" },
-        { name: "견적문의", href: "/estimate" },
-        { name: "결제하기", href: "/payment" },
-    ];
+  const navItems = [
+    { name: "멍크린 소개", href: "/about" },
+    { name: "집청소", href: "/home-cleaning" },
+    { name: "상가청소", href: "/commercial-cleaning" },
+    { name: "고객후기", href: "/reviews" },
+    { name: "견적문의", href: "/estimate" },
+    { name: "결제하기", href: "/payment" },
+  ];
 
-    return (
-        <header className={`header ${isScrolled ? "scrolled" : ""}`}>
-            <div className="container header-container">
-                <Link href="/" className="logo">
-                    <span className="logo-text">멍크린</span>
-                    <span className="logo-dot">.</span>
+  return (
+    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
+      <div className="container header-container">
+        <Link href="/" className="logo">
+          <span className="logo-text">멍크린</span>
+          <span className="logo-dot">.</span>
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="desktop-nav">
+          <ul className="nav-list">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link href={item.href} className="nav-link">
+                  {item.name}
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-                {/* Desktop Nav */}
-                <nav className="desktop-nav">
-                    <ul className="nav-list">
-                        {navItems.map((item) => (
-                            <li key={item.name}>
-                                <Link href={item.href} className="nav-link">
-                                    {item.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
+        <div className="header-actions">
+          <a href="tel:1668-4462" className="phone-link desktop-only">
+            <Smartphone size={20} />
+            <span>1668-4462</span>
+          </a>
+          <Link href="/login" className="btn-login desktop-only">
+            로그인
+          </Link>
+          <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
 
-                <div className="header-actions">
-                    <Link href="/login" className="btn-login">
-                        로그인
-                    </Link>
-                    <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
-            </div>
+      {/* Mobile Nav */}
+      <div className={`mobile-nav ${isMenuOpen ? "open" : ""}`}>
+        <ul className="mobile-nav-list">
+          {navItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                href={item.href}
+                className="mobile-nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link href="/login" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+              로그인
+            </Link>
+          </li>
+        </ul>
+      </div>
 
-            {/* Mobile Nav */}
-            <div className={`mobile-nav ${isMenuOpen ? "open" : ""}`}>
-                <ul className="mobile-nav-list">
-                    {navItems.map((item) => (
-                        <li key={item.name}>
-                            <Link
-                                href={item.href}
-                                className="mobile-nav-link"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                {item.name}
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
-                        <Link href="/login" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
-                            로그인
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         .header {
           position: fixed;
           top: 0;
@@ -89,13 +93,13 @@ export default function Header() {
           align-items: center;
           z-index: 1000;
           transition: all 0.3s ease;
-          background: transparent;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .header.scrolled {
           height: 70px;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         .header-container {
           display: flex;
@@ -132,7 +136,15 @@ export default function Header() {
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 15px;
+          gap: 20px;
+        }
+        .phone-link {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--primary);
+          font-weight: 800;
+          font-size: 1.2rem;
         }
         .btn-login {
           font-weight: 600;
@@ -140,41 +152,25 @@ export default function Header() {
         }
         .mobile-menu-btn {
           color: var(--dark-bg);
+          background: none;
+          border: none;
+          cursor: pointer;
         }
-        .mobile-nav {
-          position: fixed;
-          top: 80px;
-          left: 0;
-          width: 100%;
-          background: #fff;
-          height: 0;
-          overflow: hidden;
-          transition: all 0.3s ease;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        }
-        .mobile-nav.open {
-          height: auto;
-          padding: 20px 0;
-        }
-        .mobile-nav-list {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 20px;
-        }
-        .mobile-nav-link {
-          font-size: 1.2rem;
-          font-weight: 600;
+        .desktop-only {
+          display: none;
         }
         @media (min-width: 1024px) {
           .desktop-nav {
             display: block;
+          }
+          .desktop-only {
+            display: flex;
           }
           .mobile-menu-btn {
             display: none;
           }
         }
       `}</style>
-        </header>
-    );
+    </header>
+  );
 }
