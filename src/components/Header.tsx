@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, Smartphone } from "lucide-react";
+import { Smartphone, MessageCircle } from "lucide-react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -47,39 +46,14 @@ export default function Header() {
         </nav>
 
         <div className="header-actions">
-          <a href="tel:1668-4462" className="phone-link desktop-only">
-            <Smartphone size={20} />
-            <span>1668-4462</span>
-          </a>
           <Link href="/login" className="btn-login desktop-only">
             로그인
           </Link>
-          <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <a href="https://pf.kakao.com/_xxxx" target="_blank" rel="noopener noreferrer" className="btn-kakao desktop-only">
+            <MessageCircle size={18} fill="currentColor" />
+            <span>문의하기</span>
+          </a>
         </div>
-      </div>
-
-      {/* Mobile Nav */}
-      <div className={`mobile-nav ${isMenuOpen ? "open" : ""}`}>
-        <ul className="mobile-nav-list">
-          {navItems.map((item) => (
-            <li key={item.name}>
-              <Link
-                href={item.href}
-                className="mobile-nav-link"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link href="/login" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
-              로그인
-            </Link>
-          </li>
-        </ul>
       </div>
 
       <style jsx>{`
@@ -150,11 +124,22 @@ export default function Header() {
           font-weight: 600;
           color: var(--text-secondary);
         }
-        .mobile-menu-btn {
-          color: var(--dark-bg);
-          background: none;
-          border: none;
-          cursor: pointer;
+        .btn-kakao {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background-color: #FEE500;
+          color: #3C1E1E;
+          padding: 8px 16px;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          transition: all 0.3s ease;
+        }
+        .btn-kakao:hover {
+          background-color: #FADA0A;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(254, 229, 0, 0.3);
         }
         .desktop-only {
           display: none;
@@ -165,9 +150,6 @@ export default function Header() {
           }
           .desktop-only {
             display: flex;
-          }
-          .mobile-menu-btn {
-            display: none;
           }
         }
       `}</style>

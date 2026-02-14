@@ -3,11 +3,6 @@
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import {
-  House,
-  Truck,
-  Store,
-  Paintbrush,
-  Sparkles,
   ArrowRight,
   MessageSquareText,
   Calculator
@@ -16,11 +11,11 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   const services = [
-    { id: "moving-in", name: "입주청소", desc: "새로운 출발의 시작!", icon: <House size={40} /> },
-    { id: "moving-out", name: "이사청소", desc: "새로운 공간, 깔끔한 시작!", icon: <Truck size={40} /> },
-    { id: "commercial", name: "상가청소", desc: "비즈니스 공간의 쾌적한 시작!", icon: <Store size={40} /> },
-    { id: "interior", name: "인테리어청소", desc: "인테리어 후, 완벽한 마무리!", icon: <Paintbrush size={40} /> },
-    { id: "special", name: "특수청소", desc: "전문 기술, 완벽한 해결!", icon: <Sparkles size={40} /> },
+    { id: "moving-in", name: "입주청소", desc: "\"새로운 보금자리, 완벽한 시작\"", spritePos: "0 0" },
+    { id: "moving-out", name: "이사청소", desc: "\"새로운 공간, 깔끔한 시작!\"", spritePos: "-220px 0" },
+    { id: "commercial", name: "상가청소", desc: "\"비즈니스 공간, 청결이 중요한 시작!\"", spritePos: "0 -220px" },
+    { id: "interior", name: "인테리어청소", desc: "\"새로운 인테리어, 완벽한 마무리!\"", spritePos: "-220px -220px" },
+    { id: "special", name: "특수청소", desc: "\"어려운 청소, 멍크린이 해결합니다!\"", spritePos: "0 0" },
   ];
 
   return (
@@ -34,11 +29,17 @@ export default function Home() {
           <div className="services-illustration-grid">
             {services.map((item) => (
               <div key={item.id} className="service-illust-card">
-                <div className="illust-wrap">
-                  <div className="illust-icon">{item.icon}</div>
-                </div>
                 <h3>{item.name}</h3>
-                <p>{item.desc}</p>
+                <p className="service-desc">{item.desc}</p>
+                <div className="illust-wrap">
+                  <div
+                    className="illust-sprite"
+                    style={{
+                      backgroundPosition: item.spritePos,
+                      backgroundImage: "url('/service_illustrations.png?v=3')"
+                    }}
+                  />
+                </div>
                 <Link href="/home-cleaning" className="btn-detail-mini">자세히보기</Link>
               </div>
             ))}
@@ -63,8 +64,8 @@ export default function Home() {
           <div className="info-image-side">
             <div className="promo-image-box">
               <img
-                src="https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?q=80&w=1000"
-                alt="Professional cleaner with tablet"
+                src="/professional_cleaner.png"
+                alt="전문 청소 전문가"
                 className="promo-img"
               />
             </div>
@@ -116,44 +117,52 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 25px 15px 20px;
+          transition: all 0.3s ease;
+          background: #fff;
+        }
+        .service-illust-card:hover {
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          transform: translateY(-5px);
+          border-color: var(--primary);
+        }
+        .service-illust-card h3 {
+          font-size: 1.25rem;
+          font-weight: 800;
+          margin-bottom: 8px;
+          color: #333;
+        }
+        .service-desc {
+          font-size: 0.85rem;
+          color: #888;
+          margin-bottom: 15px;
+          line-height: 1.4;
         }
         .illust-wrap {
-          width: 140px;
-          height: 140px;
-          background-color: #f8f9fa;
-          border-radius: 10px;
+          width: 100%;
+          height: 220px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 20px;
-          border: 1px solid #eee;
-          transition: all 0.3s ease;
-        }
-        .service-illust-card:hover .illust-wrap {
-          background-color: #fff;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-          transform: translateY(-5px);
-        }
-        .illust-icon {
-          color: var(--primary);
-        }
-        .service-illust-card h3 {
-          font-size: 1.2rem;
-          font-weight: 700;
-          margin-bottom: 5px;
-        }
-        .service-illust-card p {
-          font-size: 0.85rem;
-          color: #777;
           margin-bottom: 15px;
+          overflow: hidden;
+        }
+        .illust-sprite {
+          width: 220px;
+          height: 220px;
+          background-size: 440px 440px;
+          background-repeat: no-repeat;
         }
         .btn-detail-mini {
-          font-size: 0.75rem;
-          background-color: #bbb;
+          font-size: 0.85rem;
+          background-color: #aaa;
           color: #fff;
-          padding: 4px 12px;
-          border-radius: 4px;
+          padding: 8px 22px;
+          border-radius: 6px;
           font-weight: 600;
+          transition: all 0.3s ease;
         }
         .btn-detail-mini:hover {
           background-color: var(--primary);
@@ -267,7 +276,8 @@ export default function Home() {
             text-align: center;
           }
           .services-illustration-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
+            gap: 40px;
           }
           .bottom-links-grid {
             grid-template-columns: 1fr;
