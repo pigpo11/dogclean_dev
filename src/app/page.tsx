@@ -97,7 +97,7 @@ export default function Home() {
                 <div className="service-img-wrap">
                   <img src={item.img} alt={item.name} onError={(e) => (e.currentTarget.src = 'https://placehold.co/300x300?text=Cleaning+Image')} />
                 </div>
-                <Link href="/services" className="btn-detail">자세히보기</Link>
+                <Link href="/services" className="btn btn-primary" style={{ padding: '8px 30px', fontSize: '0.95rem', minWidth: '140px' }}>자세히보기</Link>
               </div>
             ))}
           </div>
@@ -114,7 +114,7 @@ export default function Home() {
               완벽하게 케어하는 반려동물 전문 업체입니다.
             </p>
             <Link href="/about" className="btn btn-primary btn-more">
-              상담 문의 <ArrowRight size={18} />
+              더보기 <ArrowRight size={18} />
             </Link>
           </div>
         </div>
@@ -260,21 +260,24 @@ export default function Home() {
           border-radius: 8px;
         }
         .btn-detail {
-          background: #f1f5f9;
-          color: #64748b;
+          background-color: var(--primary) !important;
+          color: #ffffff !important;
           padding: 10px 30px;
           border-radius: 50px;
           font-size: 0.95rem;
           font-weight: 700;
           transition: all 0.3s ease;
-          border: 1px solid #e2e8f0;
+          border: 1px solid var(--primary);
+          display: inline-block;
+          text-decoration: none;
+          box-shadow: 0 4px 10px rgba(0, 174, 239, 0.2);
         }
         .btn-detail:hover {
-          background: var(--primary);
-          color: white;
-          border-color: var(--primary);
+          background-color: var(--primary-dark) !important;
+          color: #ffffff !important;
+          border-color: var(--primary-dark);
           transform: translateY(-2px);
-          box-shadow: 0 4px 15px rgba(0, 174, 239, 0.15);
+          box-shadow: 0 6px 20px rgba(0, 174, 239, 0.35);
         }
 
         .about-section {
