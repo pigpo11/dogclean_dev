@@ -1,168 +1,148 @@
 "use client";
 
-import { Star, MessageSquare, Image as ImageIcon } from "lucide-react";
-
 export default function ReviewsPage() {
   const reviews = [
-    { id: 1, user: "웅이맘", type: "아기맞이청소", rating: 5, date: "2026.02.10", title: "덕분에 안심하고 아기 데려왔어요!", content: "반려견이 두 마리라 털이랑 냄새 걱정이 많았는데, 컬비 장비로 벽지까지 청소해주시는 거 보고 감동받았습니다. 피톤치드 향도 너무 좋고 정말 깨끗해졌어요." },
-    { id: 2, user: "초코아빠", type: "이사청소", rating: 5, date: "2026.02.05", title: "전 거주자 반려동물 흔적 싹 사라졌네요", content: "전에 사시던 분이 고양이를 여러 마리 키우셔서 털이랑 냄새가 심했는데, 멍크린에서 오존 살균해주시고 나니까 집이 완전 새집처럼 쾌적해졌습니다." },
-    { id: 3, user: "미소사랑", type: "거주청소", rating: 4, date: "2026.01.28", title: "정기적으로 맡겨야겠어요", content: "일반 청소업체랑은 정말 다르네요. 털 한 톨 안 보이게 꼼꼼히 해주셨어요. 바닥 결까지 살려주셔서 너무 만족합니다." },
+    { id: 1, img: "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&q=60&w=600", title: "독일 키엘사 친환경 세제로 안심 케어", desc: "반려동물이 있는 집도 걱정 없는 멍크린 클리닝" },
+    { id: 2, img: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=60&w=600", title: "말끔한 새 공간으로의 완벽한 변신", desc: "보이지 않는 미세먼지까지 꼼꼼하게 제거했습니다" },
+    { id: 3, img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=60&w=600", title: "이사 전 필수! 프리미엄 입주청소 세트", desc: "멍크린의 전문 장비로 완성하는 깨끗한 첫 시작" },
+    { id: 4, img: "https://images.unsplash.com/photo-1585913661204-6204c3c3a9a2?auto=format&fit=crop&q=60&w=600", title: "구석구석 보이지 않는 사각지대까지 해결", desc: "전등 갓 내부부터 하수구 안쪽까지 완벽 살균" },
+    { id: 5, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=60&w=600", title: "처음부터 끝까지 섬세한 스팀 살균 케어", desc: "독한 화학 약품 대신 고온 스팀으로 안심 살균" },
+    { id: 6, img: "https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=60&w=600", title: "전문가의 손길로 완성되는 디테일 청소", desc: "사소한 틈새 하나 놓치지 않는 정성스러운 손길" },
+    { id: 7, img: "https://images.unsplash.com/photo-1556911220-e156211ca990?auto=format&fit=crop&q=60&w=600", title: "비즈니스 효율을 높이는 쾌적한 사무실 청소", desc: "성동구 지식산업센터 등 대형 사무공간 전문 관리" },
+    { id: 8, img: "https://images.unsplash.com/photo-1540331547168-8b63109225b7?auto=format&fit=crop&q=60&w=600", title: "합리적인 가격으로 누리는 최상의 청소 품질", desc: "부담 없는 가격과 압도적인 만족도, 멍크린입니다" },
   ];
 
   return (
-    <div className="container section">
-      <div className="review-header">
-        <h1 className="section-title">리얼 고객 후기</h1>
-        <p>멍크린을 이용하신 고객님들의 생생한 목소리를 확인하세요.</p>
-        <button className="btn btn-primary write-btn">후기 작성하기</button>
-      </div>
-
-      <div className="review-stats">
-        <div className="stat-item">
-          <span className="label">전체 평점</span>
-          <span className="value">4.9 / 5.0</span>
-          <div className="stars">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={18} fill="var(--accent)" color="var(--accent)" />)}
-          </div>
-        </div>
-        <div className="stat-item">
-          <span className="label">누적 후기</span>
-          <span className="value">1,248건</span>
+    <div className="reviews-page">
+      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1556911220-e156211ca990?auto=format&fit=crop&q=80&w=1920)' }}>
+        <div className="container">
+          <h1>청소후기</h1>
+          <p style={{ marginTop: '20px', opacity: 0.9 }}>멍크린이 직접 다녀온 생생한 현장 기록입니다</p>
         </div>
       </div>
 
-      <div className="review-list">
-        {reviews.map(r => (
-          <div key={r.id} className="review-card">
-            <div className="card-header">
-              <div className="user-info">
-                <span className="user-name">{r.user}</span>
-                <span className="service-badge">{r.type}</span>
+      <div className="container section">
+        <div className="gallery-grid">
+          {reviews.map((r) => (
+            <div key={r.id} className="gallery-card">
+              <div className="img-wrap">
+                <img src={r.img} alt={r.title} />
               </div>
-              <div className="rating-info">
-                <div className="card-stars">
-                  {[...Array(r.rating)].map((_, i) => <Star key={i} size={14} fill="var(--accent)" color="var(--accent)" />)}
-                </div>
-                <span className="date">{r.date}</span>
+              <div className="content">
+                <h3>{r.title}</h3>
+                <p>{r.desc}</p>
               </div>
             </div>
-            <h3 className="card-title">{r.title}</h3>
-            <p className="card-content">{r.content}</p>
-            <div className="card-footer">
-              <span className="action"><ImageIcon size={16} /> 사진 2장</span>
-              <span className="action"><MessageSquare size={16} /> 댓글 1</span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div className="pagination">
+          <button className="active">1</button>
+          <button>2</button>
+          <button>다음</button>
+          <button>마지막</button>
+        </div>
       </div>
 
       <style jsx>{`
-        .review-header {
+        .page-header {
+          height: 350px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           text-align: center;
-          margin-bottom: 60px;
+          background-size: cover;
+          background-position: center;
+          color: white;
         }
-        .write-btn {
-          margin-top: 30px;
+        .page-header h1 {
+          font-size: 3.5rem;
+          font-weight: 900;
         }
-        .review-stats {
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 25px;
+        }
+        .gallery-card {
+          background: #fff;
+          border: 1px solid #f0f0f0;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .gallery-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+          border-color: var(--primary-light);
+        }
+        .img-wrap {
+          aspect-ratio: 4/3;
+          overflow: hidden;
+        }
+        .img-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        .gallery-card:hover .img-wrap img {
+          transform: scale(1.05);
+        }
+        .content {
+          padding: 20px;
+        }
+        .content h3 {
+          font-size: 1.1rem;
+          font-weight: 800;
+          margin-bottom: 12px;
+          color: #1e293b;
+          line-height: 1.4;
+          word-break: keep-all;
+        }
+        .content p {
+          font-size: 0.9rem;
+          color: #64748b;
+          line-height: 1.6;
+          word-break: keep-all;
+        }
+        .pagination {
           display: flex;
           justify-content: center;
-          gap: 100px;
-          padding: 40px;
+          gap: 8px;
+          margin-top: 80px;
+        }
+        .pagination button {
+          padding: 10px 18px;
+          border: 1px solid #e2e8f0;
           background: #fff;
-          border-radius: 20px;
-          margin-bottom: 60px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-        .stat-item {
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 10px;
-        }
-        .stat-item .label {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-        }
-        .stat-item .value {
-          font-size: 2rem;
-          font-weight: 800;
-          color: var(--dark-bg);
-        }
-        .review-list {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 30px;
-        }
-        .review-card {
-          background: #fff;
-          padding: 40px;
-          border-radius: 20px;
-          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .card-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-        .user-info {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-        .user-name {
-          font-weight: 700;
-          font-size: 1.1rem;
-        }
-        .service-badge {
-          background: var(--background);
-          color: var(--primary);
-          padding: 4px 12px;
-          border-radius: 50px;
-          font-size: 0.85rem;
+          font-size: 0.95rem;
           font-weight: 600;
+          color: #64748b;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
         }
-        .rating-info {
-          text-align: right;
+        .pagination button:hover {
+          background: #f8fafc;
+          border-color: #cbd5e1;
+          color: #1e293b;
         }
-        .date {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+        .pagination button.active {
+          background: var(--primary);
+          color: white;
+          border-color: var(--primary);
         }
-        .card-stars {
-          display: flex;
-          gap: 2px;
-          margin-bottom: 5px;
+        @media (max-width: 1200px) {
+          .gallery-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        .card-title {
-          font-size: 1.3rem;
-          margin-bottom: 15px;
-          color: var(--dark-bg);
+        @media (max-width: 900px) {
+          .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        .card-content {
-          color: var(--text-secondary);
-          line-height: 1.8;
-          margin-bottom: 25px;
-        }
-        .card-footer {
-          display: flex;
-          gap: 20px;
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-        }
-        .action {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-        }
-        @media (max-width: 768px) {
-          .review-stats { gap: 40px; padding: 30px 20px; }
-          .review-card { padding: 30px 20px; }
-          .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-          .rating-info { text-align: left; }
+        @media (max-width: 600px) {
+          .gallery-grid { grid-template-columns: 1fr; }
+          .page-header h1 { font-size: 2.5rem; }
         }
       `}</style>
     </div>

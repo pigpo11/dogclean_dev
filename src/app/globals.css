@@ -1,15 +1,18 @@
 :root {
-  --primary: #FF8C42;
-  --primary-dark: #E67332;
-  --secondary: #4ECDC4;
+  --primary: #00AEEF;
+  --primary-dark: #0088cc;
+  --primary-light: #e0f4ff;
+  --secondary: #1e3a8a;
   --accent: #FFD93D;
-  --background: #FFF9F5;
-  --dark-bg: #2C3E50;
-  --text-primary: #333333;
-  --text-secondary: #777777;
-  --success: #27AE60;
-  --error: #E74C3C;
+  --background: #ffffff;
+  --dark-bg: #1e293b;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --success: #10b981;
+  --error: #ef4444;
   --white: #ffffff;
+  --border-light: #f1f5f9;
 }
 
 * {
@@ -45,29 +48,43 @@ ul {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #333;
 }
 
 .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-weight: 700;
   transition: all 0.3s ease;
-  text-align: center;
+  font-size: 1rem;
 }
 
 .btn-primary {
   background-color: var(--primary);
-  color: var(--white);
+  color: #fff;
 }
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
 }
 
 .btn-outline {
@@ -77,23 +94,28 @@ ul {
 
 .btn-outline:hover {
   background-color: var(--primary);
-  color: var(--white);
-}
-
-.section {
-  padding: 80px 0;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 40px;
-  color: var(--dark-bg);
+  color: #fff;
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
   .section-title {
     font-size: 2rem;
+    margin-bottom: 40px;
   }
+}
+
+.bg-white {
+  background-color: var(--white) !important;
+}
+
+.bg-light {
+  background-color: var(--background) !important;
 }

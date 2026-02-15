@@ -1,307 +1,310 @@
 "use client";
 
-import { useState } from "react";
-import { Minus, Plus, CreditCard, ShoppingBag, CheckCircle2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { loadTossPayments } from "@tosspayments/payment-sdk";
+import { CreditCard, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function PaymentPage() {
-    const [quantity, setQuantity] = useState(1);
-    const pricePerUnit = 10000;
-    const totalPrice = pricePerUnit * quantity;
+  const [clientKey] = useState("test_ck_D4yKeq5bgrpoYOn6LJlV8W6vlRe2"); // 테스트 키
+  const [quantity, setQuantity] = useState<number | string>(1);
+  const unitPrice = 10000;
 
-    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(e.target.value);
-        if (!isNaN(value) && value > 0) {
-            setQuantity(value);
-        } else if (e.target.value === "") {
-            setQuantity(0); // Allow empty input temporarily while typing
-        }
-    };
+  const handleQuantityInput = (val: string) => {
+    if (val === "") {
+      setQuantity("");
+      return;
+    }
+    const num = parseInt(val);
+    if (!isNaN(num)) {
+      setQuantity(num);
+    }
+  };
 
-    const increment = () => setQuantity(prev => prev + 1);
-    const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+  const validateQuantity = () => {
+    const num = typeof quantity === 'string' ? parseInt(quantity) : quantity;
+    if (isNaN(num) || num < 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(num);
+    }
+  };
 
-    const handlePayment = () => {
-        if (quantity === 0) {
-            alert("구매 수량을 1개 이상 선택해주세요.");
-            return;
-        }
-        alert(`총 ${totalPrice.toLocaleString()}원 결제를 시작합니다. (Toss Payments 연동 준비 중)`);
-        // 실제 연동 로직은 PRD에 명세된 대로 SDK 호출이 필요합니다.
-    };
+  const handlePayment = async () => {
+    const finalQuantity = typeof quantity === 'string' ? (parseInt(quantity) || 1) : quantity;
+    try {
+      const tossPayments = await loadTossPayments(clientKey);
 
-    return (
-        <div className="container section">
-            <h1 className="section-title">결제하기</h1>
-            <p className="page-desc">멍크린의 프리미엄 청소 서비스를 간편하게 결제하세요.</p>
+      await tossPayments.requestPayment("카드", {
+        amount: unitPrice * finalQuantity,
+        orderId: `order-${Math.random().toString(36).slice(2, 9)}`,
+        orderName: `멍크린 프리미엄 청소 ${finalQuantity > 1 ? `(${finalQuantity}개)` : ""}`,
+        customerName: "고객님",
+        successUrl: `${window.location.origin}/success`,
+        failUrl: `${window.location.origin}/fail`,
+      });
+    } catch (err) {
+      console.error("결제 요청 실패:", err);
+    }
+  };
 
-            <div className="payment-grid">
-                <div className="product-card">
-                    <div className="product-img">
-                        <span className="premium-tag">PREMIUM</span>
-                    </div>
-                    <div className="product-info">
-                        <h2>멍크린 프리미엄 서비스</h2>
-                        <p className="product-desc">
-                            반려동물 가정에 최적화된 올인원 케어 솔루션입니다.
-                            오존 살균, 컬비 디테일 케어, 피톤치드 마감이 모두 포함되어 있습니다.
-                        </p>
-                        <ul className="service-includes">
-                            <li><CheckCircle2 size={16} /> 8단계 정밀 청소 프로세스</li>
-                            <li><CheckCircle2 size={16} /> 독일 키엘사 친환경 세제 사용</li>
-                            <li><CheckCircle2 size={16} /> 전용 전문 장비 풀케어</li>
-                        </ul>
-                        <div className="price-tag">
-                            <span className="amount">{pricePerUnit.toLocaleString()}</span>
-                            <span className="unit">원 / 1회</span>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div className="payment-page">
+      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=80&w=1920)' }}>
+        <div className="container">
+          <h1>결제하기</h1>
+          <p>프리미엄 서비스를 간편하게 결제하세요</p>
+        </div>
+      </div>
 
-                <div className="checkout-card">
-                    <div className="checkout-header">
-                        <h3>주문 요약</h3>
-                    </div>
+      <div className="container payment-container">
+        <div className="payment-card">
+          <div className="product-info">
+            <div className="product-badge">Premium Service</div>
+            <h2 className="product-name">멍크린 프리미엄 청소</h2>
 
-                    <div className="checkout-body">
-                        <div className="quantity-section">
-                            <label>구매 수량</label>
-                            <div className="quantity-control">
-                                <button className="q-btn" onClick={decrement} aria-label="감소"><Minus size={18} /></button>
-                                <input
-                                    type="number"
-                                    className="q-input"
-                                    value={quantity === 0 ? "" : quantity}
-                                    onChange={handleQuantityChange}
-                                    min="1"
-                                />
-                                <button className="q-btn" onClick={increment} aria-label="증가"><Plus size={18} /></button>
-                            </div>
-                        </div>
-
-                        <div className="billing-details">
-                            <div className="bill-row">
-                                <span>상품 합계</span>
-                                <span>{totalPrice.toLocaleString()}원</span>
-                            </div>
-                            <div className="bill-row">
-                                <span>할인 금액</span>
-                                <span className="discount">- 0원</span>
-                            </div>
-                            <div className="bill-row total">
-                                <span>최종 결제 금액</span>
-                                <span className="total-amount">{totalPrice.toLocaleString()}원</span>
-                            </div>
-                        </div>
-
-                        <button className="btn btn-primary buy-btn" onClick={handlePayment}>
-                            <CreditCard size={20} /> {totalPrice.toLocaleString()}원 결제하기
-                        </button>
-                        <p className="secure-notice">
-                            <ShoppingBag size={14} /> 안전한 토스페이먼츠 결제 시스템을 사용합니다.
-                        </p>
-                    </div>
-                </div>
+            <div className="quantity-control">
+              <span className="label">구매 수량</span>
+              <div className="selector">
+                <button type="button" onClick={() => {
+                  const current = typeof quantity === 'string' ? (parseInt(quantity) || 0) : quantity;
+                  if (current > 1) setQuantity(current - 1);
+                }}>−</button>
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => handleQuantityInput(e.target.value)}
+                  onBlur={validateQuantity}
+                  min="1"
+                />
+                <button type="button" onClick={() => {
+                  const current = typeof quantity === 'string' ? (parseInt(quantity) || 0) : quantity;
+                  setQuantity(current + 1);
+                }}>+</button>
+              </div>
             </div>
 
-            <style jsx>{`
-        .page-desc {
-          text-align: center;
-          color: var(--text-secondary);
-          margin-bottom: 60px;
+            <div className="price-tag">
+              <span className="amount">{(unitPrice * (Number(quantity) || 1)).toLocaleString()}</span>
+              <span className="currency">원</span>
+            </div>
+          </div>
+
+          <div className="service-details">
+            <div className="detail-item">
+              <CheckCircle2 size={18} color="#00AEEF" />
+              <span>컬비(Kirby) 시스템 집중 케어 (수량별 적용)</span>
+            </div>
+            <div className="detail-item">
+              <CheckCircle2 size={18} color="#00AEEF" />
+              <span>친환경 세제 및 오존 살균</span>
+            </div>
+            <div className="detail-item">
+              <CheckCircle2 size={18} color="#00AEEF" />
+              <span>반려동물 맞춤 전문 클리닝</span>
+            </div>
+          </div>
+
+          <div className="payment-guide">
+            <div className="guide-header">
+              <ShieldCheck size={20} color="#059669" />
+              <span>안전한 결제 안내</span>
+            </div>
+            <p>토스페이먼츠의 보안 결제 시스템을 통해 안전하게 처리됩니다.</p>
+          </div>
+
+          <button className="pay-btn" onClick={handlePayment}>
+            <CreditCard size={20} />
+            {(unitPrice * (Number(quantity) || 1)).toLocaleString()}원 결제하기
+          </button>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .payment-page {
+          min-height: 100vh;
+          background-color: #f8fafc;
+          padding-bottom: 100px;
         }
-        .payment-grid {
-          display: grid;
-          grid-template-columns: 1fr 400px;
-          gap: 40px;
-          align-items: start;
-        }
-        .product-card {
-          background: #fff;
-          border-radius: 30px;
-          overflow: hidden;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-          display: flex;
-          flex-direction: column;
-        }
-        .product-img {
-          height: 300px;
-          background: linear-gradient(135deg, #FF8C42 0%, #FFB382 100%);
-          position: relative;
-        }
-        .premium-tag {
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(5px);
-          color: #fff;
-          padding: 6px 15px;
-          border-radius: 50px;
-          font-weight: 800;
-          font-size: 0.8rem;
-          letter-spacing: 1px;
-        }
-        .product-info {
-          padding: 40px;
-        }
-        .product-info h2 {
-          font-size: 2rem;
-          margin-bottom: 15px;
-          color: var(--dark-bg);
-        }
-        .product-desc {
-          color: var(--text-secondary);
-          line-height: 1.7;
-          margin-bottom: 25px;
-        }
-        .service-includes {
-          margin-bottom: 30px;
-          font-size: 0.95rem;
-          color: var(--text-primary);
-        }
-        .service-includes li {
+        .page-header {
+          height: 350px;
           display: flex;
           align-items: center;
-          gap: 8px;
-          margin-bottom: 10px;
+          justify-content: center;
+          text-align: center;
+          color: white;
+          background-size: cover;
+          background-position: center;
+        }
+        .page-header h1 {
+          font-size: 3.5rem;
+          font-weight: 900;
+          margin-bottom: 15px;
+          text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .page-header p {
+          font-size: 1.25rem;
+          opacity: 0.9;
+        }
+        .payment-container {
+          max-width: 600px;
+          margin: -80px auto 0;
+          position: relative;
+          z-index: 10;
+        }
+        .payment-card {
+          background: white;
+          border-radius: 24px;
+          padding: 50px;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+          border: 1px solid rgba(0,0,0,0.05);
+        }
+        .product-info {
+          text-align: center;
+          margin-bottom: 40px;
+          padding-bottom: 30px;
+          border-bottom: 1px dashed #e2e8f0;
+        }
+        .product-badge {
+          display: inline-block;
+          padding: 6px 16px;
+          background: var(--primary-light);
+          color: var(--primary);
+          border-radius: 100px;
+          font-size: 0.85rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+        }
+        .product-name {
+          font-size: 2rem;
+          font-weight: 800;
+          color: #1e293b;
+          margin-bottom: 20px;
         }
         .price-tag {
-          font-size: 1.8rem;
-          font-weight: 800;
-          color: var(--primary);
+          color: #0f172a;
         }
-        .price-tag .unit {
-          font-size: 1rem;
-          color: var(--text-secondary);
-          font-weight: 500;
+        .amount {
+          font-size: 3rem;
+          font-weight: 900;
+        }
+        .currency {
+          font-size: 1.5rem;
+          font-weight: 700;
           margin-left: 5px;
-        }
-
-        .checkout-card {
-          background: #fff;
-          border-radius: 30px;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-          position: sticky;
-          top: 100px;
-        }
-        .checkout-header {
-          padding: 25px 30px;
-          border-bottom: 1px solid #f0f0f0;
-        }
-        .checkout-header h3 {
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-        .checkout-body {
-          padding: 30px;
-        }
-        .quantity-section {
-          margin-bottom: 30px;
-        }
-        .quantity-section label {
-          display: block;
-          margin-bottom: 15px;
-          font-weight: 700;
-          font-size: 0.95rem;
         }
         .quantity-control {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          background: #f8f9fa;
-          border-radius: 12px;
-          padding: 5px;
-          border: 1px solid #eee;
+          gap: 12px;
+          margin-bottom: 25px;
         }
-        .q-btn {
-          width: 45px;
-          height: 45px;
+        .quantity-control .label {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #64748b;
+        }
+        .selector {
+          display: flex;
+          align-items: center;
+          background: #f1f5f9;
+          padding: 5px;
+          border-radius: 12px;
+          border: 1px solid #e2e8f0;
+        }
+        .selector button {
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+          border: none;
+          background: white;
+          color: #1e293b;
+          font-size: 1.2rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 10px;
-          background: #fff;
-          color: var(--dark-bg);
           box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-          transition: all 0.2s;
         }
-        .q-btn:hover {
-          background: var(--primary);
-          color: #fff;
+        .selector button:hover {
+          background: #f8fafc;
+          transform: translateY(-1px);
         }
-        .q-input {
-          flex: 1;
+        .selector input {
+          width: 60px;
+          text-align: center;
           border: none;
           background: transparent;
-          text-align: center;
-          font-size: 1.2rem;
-          font-weight: 700;
-          width: 60px;
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #1e293b;
           outline: none;
-          appearance: textfield;
+          -moz-appearance: textfield;
         }
-        .q-input::-webkit-outer-spin-button,
-        .q-input::-webkit-inner-spin-button {
+        .selector input::-webkit-outer-spin-button,
+        .selector input::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
         }
-
-        .billing-details {
-          margin-bottom: 30px;
+        .service-details {
+          margin-bottom: 40px;
+        }
+        .detail-item {
           display: flex;
-          flex-direction: column;
-          gap: 15px;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 15px;
+          color: #475569;
+          font-weight: 500;
         }
-        .bill-row {
+        .payment-guide {
+          background: #f0fdf4;
+          padding: 20px;
+          border-radius: 16px;
+          margin-bottom: 40px;
+        }
+        .guide-header {
           display: flex;
-          justify-content: space-between;
-          font-size: 0.95rem;
-          color: var(--text-secondary);
+          align-items: center;
+          gap: 8px;
+          color: #059669;
+          font-weight: 700;
+          margin-bottom: 8px;
         }
-        .discount {
-          color: var(--error);
+        .payment-guide p {
+          font-size: 0.9rem;
+          color: #15803d;
+          line-height: 1.5;
         }
-        .total {
-          border-top: 1px dashed #ddd;
-          padding-top: 20px;
-          margin-top: 5px;
-          color: var(--dark-bg);
-          font-weight: 800;
-        }
-        .total-amount {
-          font-size: 1.5rem;
-          color: var(--primary);
-        }
-
-        .buy-btn {
+        .pay-btn {
           width: 100%;
-          padding: 18px;
+          height: 60px;
+          background: #1e293b;
+          color: white;
+          border: none;
+          border-radius: 16px;
           font-size: 1.15rem;
+          font-weight: 700;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
-          border-radius: 15px;
+          gap: 12px;
+          cursor: pointer;
+          transition: all 0.3s;
         }
-        .secure-notice {
-          text-align: center;
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          margin-top: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
+        .pay-btn:hover {
+          background: #0f172a;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        @media (max-width: 1024px) {
-          .payment-grid {
-            grid-template-columns: 1fr;
-          }
-          .checkout-card {
-            position: static;
-          }
+        @media (max-width: 768px) {
+          .payment-card { padding: 30px; }
+          .page-header h1 { font-size: 2.5rem; }
+          .amount { font-size: 2.5rem; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
