@@ -22,18 +22,18 @@ export default function Home() {
   const slides = [
     {
       img: "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=1920",
-      text1: "반려동물과 사람이 함께 행복한 전문 홈클리닝",
-      text2: "우리 아이가 숨쉬는 공간, 멍크린이 책임집니다",
+      text1: "반려동물과 사람이 함께 행복한<br />전문 홈클리닝",
+      text2: "우리 아이가 숨쉬는 공간,<br />멍크린이 책임집니다",
     },
     {
       img: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&q=80&w=1920",
       text1: "컬비(Kirby) 전용 장비 도입",
-      text2: "보이지 않는 진드기부터 털 한 톨까지 완벽 제거",
+      text2: "보이지 않는 진드기부터<br />털 한 톨까지 완벽 제거",
     },
     {
       img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1920",
       text1: "친환경 케어 & 오존 살균",
-      text2: "무독성 세제로 안심하고 맡기는 프리미엄 청소",
+      text2: "무독성 세제로 안심하고 맡기는<br />프리미엄 청소",
     },
   ];
 
@@ -69,8 +69,8 @@ export default function Home() {
                 animate={index === currentSlide ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8 }}
               >
-                <p className="slide-subtext">{slide.text1}</p>
-                <h2 className="slide-maintext">{slide.text2}</h2>
+                <p className="slide-subtext" dangerouslySetInnerHTML={{ __html: slide.text1 }}></p>
+                <h2 className="slide-maintext" dangerouslySetInnerHTML={{ __html: slide.text2 }}></h2>
               </motion.div>
             </div>
           </div>
@@ -104,22 +104,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="about-section">
+      <section className="about-section" style={{ backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.2) 100%), url(https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=1920)' }}>
         <div className="container about-container">
           <div className="about-text">
-            <h2>반려동물과 사람이 함께<br />행복한 정정당당 멍크린</h2>
+            <h2>반려동물과 사람이 함께<br />행복한 멍크린</h2>
             <p>
-              컬비(Kirby) 전용 장비와 친환경 세제를 사용하여,<br />
-              일반 청소로는 해결하기 힘든 반려동물의 털과 미세먼지,<br />
-              세균까지 완벽하게 케어하는 반려동물 전문 업체입니다.
+              컬비 전용 장비와 친환경 세제를 사용하여,<br />
+              일반청소로는 해결하기 힘든 반려동물의 털과 미세먼지, 세균까지<br />
+              완벽하게 케어하는 반려동물 전문 업체입니다.
             </p>
             <Link href="/about" className="btn btn-primary btn-more">
               상담 문의 <ArrowRight size={18} />
             </Link>
-          </div>
-          <div className="about-image">
-            <img src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?auto=format&fit=crop&q=80&w=800" alt="Pet and Cleaning" />
           </div>
         </div>
       </section>
@@ -282,28 +278,32 @@ export default function Home() {
         }
 
         .about-section {
-          background: #f4f7f9;
-          padding: 100px 0;
+          background-size: cover;
+          background-position: center;
+          padding: 150px 0;
+          position: relative;
         }
         .about-container {
           display: flex;
           align-items: center;
-          gap: 60px;
         }
         .about-text {
-          flex: 1;
+          max-width: 600px;
+          color: white;
         }
         .about-text h2 {
-          font-size: 2.2rem;
-          font-weight: 800;
+          font-size: 2.8rem;
+          font-weight: 900;
           margin-bottom: 30px;
           line-height: 1.3;
+          text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         .about-text p {
-          color: #666;
-          font-size: 1.1rem;
+          color: rgba(255,255,255,0.9);
+          font-size: 1.25rem;
           line-height: 1.8;
           margin-bottom: 40px;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .about-image {
           flex: 1;
@@ -353,7 +353,12 @@ export default function Home() {
           .services-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 768px) {
-          .about-container { flex-direction: column; text-align: center; }
+          .about-section { padding: 80px 0; }
+          .about-container { flex-direction: column; text-align: center; justify-content: center; }
+          .about-text { margin: 0 auto; width: 100%; }
+          .about-text h2 { font-size: 1.8rem; word-break: keep-all; }
+          .about-text p { font-size: 1rem; line-height: 1.6; word-break: keep-all; }
+          .desktop-only { display: none; }
           .services-grid { grid-template-columns: 1fr; }
           .info-cards-grid { grid-template-columns: 1fr; }
           .slide-maintext { font-size: 2rem; }
