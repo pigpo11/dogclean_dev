@@ -19,11 +19,11 @@ export default function Header() {
   }, []);
 
   const serviceSubItems = [
-    { name: "이사청소", href: "/services#moving" },
-    { name: "거주청소", href: "/services#residential" },
-    { name: "아기맞이청소", href: "/services#baby" },
-    { name: "무지개청소", href: "/services#rainbow" },
-    { name: "상가청소", href: "/services#commercial" },
+    { name: "이사청소", href: "/services/moving" },
+    { name: "거주청소", href: "/services/residential" },
+    { name: "아기맞이청소", href: "/services/baby" },
+    { name: "무지개청소", href: "/services/rainbow" },
+    { name: "상가청소", href: "/services/commercial" },
   ];
 
   return (
@@ -72,9 +72,9 @@ export default function Header() {
         </nav>
 
         <div className="header-actions">
-          <a href="tel:010-8353-6587" className="phone-link desktop-only">
+          <a href="tel:1661-0959" className="phone-link desktop-only">
             <Phone size={20} fill="currentColor" />
-            <span>010-8353-6587</span>
+            <span>1661-0959</span>
           </a>
           <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -127,9 +127,9 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <a href="tel:010-8353-6587" className="mobile-phone-link">
+                <a href="tel:1661-0959" className="mobile-phone-link">
                   <Phone size={20} fill="currentColor" />
-                  <span>010-8353-6587</span>
+                  <span>1661-0959</span>
                 </a>
               </li>
             </ul>

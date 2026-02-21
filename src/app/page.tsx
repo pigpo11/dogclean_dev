@@ -45,11 +45,11 @@ export default function Home() {
   }, []);
 
   const services = [
-    { id: "moving", name: "이사청소", desc: "\"애견 맞춤 공간, 털 없이 깔끔한 시작!\"", img: "/services/moving.png" },
-    { id: "residential", name: "거주청소", desc: "\"우리 강아지도 좋아하는 쾌적한 우리 집!\"", img: "/services/residential.png" },
-    { id: "baby", name: "아기맞이청소", desc: "\"면역력 약한 아기를 위한 살균 소독!\"", img: "/services/baby.png" },
-    { id: "rainbow", name: "무지개청소", desc: "\"함께했던 시간을 소중히, 따뜻한 안녕!\"", img: "/services/rainbow.png" },
-    { id: "commercial", name: "상가청소", desc: "\"아이들이 방문하는 상업 공간도 청결하게!\"", img: "/services/commercial.png" },
+    { id: "moving", name: "이사청소", desc: "\"이전 거주자의 흔적을 지우는 깔끔한 시작!\"", img: "/services/moving.png" },
+    { id: "residential", name: "거주청소", desc: "\"우리 가족의 건강을 지키는 프리미엄 케어!\"", img: "/services/residential.png" },
+    { id: "baby", name: "아기맞이청소", desc: "\"면역력 약한 아기를 위한 안심 살균!\"", img: "/services/baby.png" },
+    { id: "rainbow", name: "무지개청소", desc: "\"냄새와 세균 걱정 없는 쾌적한 펫 환경!\"", img: "/services/rainbow.png" },
+    { id: "commercial", name: "상가청소", desc: "\"성공을 부르는 청결한 비즈니스 공간!\"", img: "/services/commercial.png" },
   ];
 
   return (
@@ -97,7 +97,7 @@ export default function Home() {
                 <div className="service-img-wrap">
                   <img src={item.img} alt={item.name} onError={(e) => (e.currentTarget.src = 'https://placehold.co/300x300?text=Cleaning+Image')} />
                 </div>
-                <Link href="/services" className="btn btn-primary" style={{ padding: '8px 30px', fontSize: '0.95rem', minWidth: '140px' }}>자세히보기</Link>
+                <Link href={`/services/${item.id}`} className="btn btn-primary" style={{ padding: '8px 30px', fontSize: '0.95rem', minWidth: '140px' }}>자세히보기</Link>
               </div>
             ))}
           </div>

@@ -14,13 +14,13 @@ export default function Footer() {
           </div>
           <div className="footer-customer-service">
             <span>멍크린 고객센터</span>
-            <span className="footer-phone">010-8353-6587</span>
+            <span className="footer-phone">1661-0959</span>
           </div>
         </div>
 
         <div className="footer-info">
           <p>
-            전화: 010-8353-6587 &nbsp; | &nbsp; 이메일: lisa73333@naver.com &nbsp; | &nbsp; 대표: 멍크린 &nbsp;
+            전화: 1661-0959 &nbsp; | &nbsp; 이메일: lisa73333@naver.com &nbsp; | &nbsp; 대표: 멍크린 &nbsp;
           </p>
           <p className="copyright">Copyright © 멍크린 all rights reserved.</p>
         </div>
