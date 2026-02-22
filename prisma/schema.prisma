@@ -27,7 +27,7 @@ model Review {
   id          Int      @id @default(autoincrement())
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
-  serviceType String   // 이사청소, 거주청소, 아기맞이청소, 무지개청소, 상가청소
+  serviceType String   // 이사청소, 거주청소, 아기맞이청소, 무지개다리 청소, 상가청소
   rating      Int
   title       String
   content     String

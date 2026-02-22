@@ -98,7 +98,7 @@ export default function AboutPage() {
             marginTop: '60px'
           }}>
             {[
-              { title: "미세 털 박멸", desc: "패브릭 사이사이에 박힌 반려견/반려묘의 털을 강력 흡입하여 제거합니다.", icon: "🐕" },
+              { title: "미세 털 박멸", desc: "집안 곳곳 벽지 틈 사이에 박힌 강아지와 고양이의 털을 강력흡입하여 제거합니다", icon: "🐕" },
               { title: "냄새 원인 제거", desc: "배어있는 특유의 찌든 냄새를 원인부터 분해하여 제거합니다.", icon: "🫧" },
               { title: "세균/진드기 케어", desc: "황색포도상구균, 곰팡이, 집먼지진드기 등 유해균을 살균합니다.", icon: "🦠" },
               { title: "피부/호흡기 보호", desc: "반려동물과 보호자의 알레르기 및 호흡기 질환을 예방합니다.", icon: "❤️" }
@@ -135,317 +135,157 @@ export default function AboutPage() {
           <div className="equipment-simple-grid">
             <motion.div className="equipment-simple-item" {...fadeInUp}>
               <div className="simple-img-box">
-                <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1000" alt="최첨단 전문 장비" />
+                <img src="/kirby_vacuum.png" alt="최첨단 전문 장비 - 컬비 고성능 흡입청소기" />
               </div>
               <div className="simple-text-box">
                 <h3>최첨단 전문 장비 보유</h3>
-                <p>고성능 스팀기, 산업용 고압 세척기 등 각 상황에 맞는 최신 장비를 활용합니다.</p>
+                <p>고성능 흡입청소기, 고성능 스팀기, 오존 살균기 등 각 상황에 맞는 최신 장비를 활용합니다.</p>
               </div>
             </motion.div>
             <motion.div className="equipment-simple-item" {...fadeInUp} transition={{ delay: 0.2 }}>
               <div className="simple-img-box">
-                <img src="https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&q=80&w=1000" alt="친환경 세제 사용" />
+                <img src="/detergent.png" alt="독일 키일(KIEHL)사 친환경 세제 사용" />
               </div>
               <div className="simple-text-box">
-                <h3>친환경 세제 사용</h3>
-                <p>가족과 반려동물의 건강을 생각하여 인체에 무해한 검증된 친환경 세제만을 고집합니다.</p>
+                <h3>독일 키일(KIEHL)사 친환경 세제 사용</h3>
+                <p>120년 전통의 독일 키일사 친환경 세제를 사용하여 가족과 반려동물의 건강까지 생각하는 안전하고 완벽한 클리닝을 약속합니다.</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 4. Mungclean's Principles */}
-      <section className="section principles-section" style={{ background: '#fff' }}>
+      {/* 4. Mungclean's 8-Step Premium Process */}
+      <section className="section process-detail-section" style={{ background: '#fff' }}>
         <div className="container">
-          <div className="section-header" style={{ textAlign: 'center', marginBottom: '50px' }}>
-            <h2 className="principles-title" style={{ fontSize: '2.5rem', fontWeight: 900 }}>
-              <span style={{ color: 'var(--primary)' }}>멍크린</span>의 3대 약속
-            </h2>
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <h2 style={{ fontSize: '1.25rem', color: 'var(--primary)', fontWeight: 700, marginBottom: '15px' }}>PREMIUM WORKFLOW</h2>
+            <h3 style={{ fontSize: '2.8rem', fontWeight: 900, color: '#111', wordBreak: 'keep-all' }}>
+              멍크린만의 <span style={{ color: 'var(--primary)' }}>6단계 정밀 케어</span> 공정
+            </h3>
+            <p style={{ marginTop: '20px', fontSize: '1.15rem', color: '#666' }}>단순한 청소를 넘어 전문 장비와 기술력으로 완벽한 공간을 만듭니다.</p>
           </div>
-          <div className="principles-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '30px',
-            maxWidth: '1200px',
-            margin: '0 auto'
-          }}>
-            <motion.div
-              className="principle-card"
-              {...fadeInUp}
-              style={{
-                border: '1px solid #eee',
-                padding: '60px 30px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                background: '#fff',
-                borderRadius: '24px',
-                boxShadow: '0 15px 40px rgba(0,0,0,0.03)'
-              }}
-            >
-              <div className="icon-circle-bg" style={{
-                width: '120px',
-                height: '120px',
-                background: '#f8fbfc',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '35px'
-              }}>
-                <Sparkles size={60} color="var(--primary)" />
-              </div>
-              <h4 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '20px', color: '#111' }}>특수 살균/소독 기술</h4>
-              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#666', wordBreak: 'keep-all', maxWidth: '300px', margin: '0 auto' }}>
-                단순 흡입을 넘어 고온 스팀과 UV 소독을 통해 반려동물이 남긴 보이지 않는 세균까지 완벽하게 제거합니다.
-              </p>
-            </motion.div>
 
-            <motion.div
-              className="principle-card"
-              {...fadeInUp}
-              transition={{ delay: 0.1 }}
-              style={{
-                border: '1px solid #eee',
-                padding: '60px 30px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                background: '#fff',
-                borderRadius: '24px',
-                boxShadow: '0 15px 40px rgba(0,0,0,0.03)'
-              }}
-            >
-              <div className="icon-circle-bg" style={{
-                width: '120px',
-                height: '120px',
-                background: '#f8fbfc',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '35px'
-              }}>
-                <ShieldCheck size={60} color="var(--primary)" />
-              </div>
-              <h4 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '20px', color: '#111' }}>친환경 케어 솔루션</h4>
-              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#666', wordBreak: 'keep-all', maxWidth: '300px', margin: '0 auto' }}>
-                반려동물의 예민한 후각과 피부를 위해 검증된 유기농·친환경 세제만을 사용하여 인체와 동물 모두에게 무해합니다.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="principle-card"
-              {...fadeInUp}
-              transition={{ delay: 0.2 }}
-              style={{
-                border: '1px solid #eee',
-                padding: '60px 30px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                background: '#fff',
-                borderRadius: '24px',
-                boxShadow: '0 15px 40px rgba(0,0,0,0.03)'
-              }}
-            >
-              <div className="icon-circle-bg" style={{
-                width: '120px',
-                height: '120px',
-                background: '#f8fbfc',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '35px'
-              }}>
-                <Users size={60} color="var(--primary)" />
-              </div>
-              <h4 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '20px', color: '#111' }}>반려동물 이해 전문가</h4>
-              <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#666', wordBreak: 'keep-all', maxWidth: '300px', margin: '0 auto' }}>
-                실제 반려동물을 사랑하고 이해하는 전문가들로 구성된 팀이 현장을 방문하여 정성 가득한 케어를 약속합니다.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Kitchen & Sink Gallery */}
-      <section className="section gallery-section no-padding-bottom">
-        <div className="container">
-          <div className="gallery-header">
-            <h3>01. 주방 및 싱크대 케어</h3>
-            <p>기름때 제거부터 배수구 살균 소독까지 꼼꼼하게 진행합니다.</p>
-          </div>
-          <div className="gallery-grid-4">
-            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600" alt="Kitchen 1" />
-            <img src="https://images.unsplash.com/photo-1527515545081-5db817172677?auto=format&fit=crop&q=80&w=600" alt="Kitchen 2" />
-            <img src="https://images.unsplash.com/photo-1584622781564-1d9876a1dfd1?auto=format&fit=crop&q=80&w=600" alt="Kitchen 3" />
-            <img src="https://images.unsplash.com/photo-1528203323901-4d9d40fe615e?auto=format&fit=crop&q=80&w=600" alt="Kitchen 4" />
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Service Process Section (Newly Added) */}
-      <section className="section process-section bg-white" style={{ padding: '100px 0' }}>
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">멍크린의 체계적인 서비스 과정</h2>
-            <p>보이지 않는 곳까지 완벽하게, 4단계 케어 프로세스로 진행됩니다.</p>
-          </div>
-          <div className="process-steps" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '20px',
-            marginTop: '60px',
-            position: 'relative'
-          }}>
+          <div className="process-timeline-wrap">
             {[
-              { step: "01", title: "현장 오염도 체크", desc: "전문 장비로 오염 상태와 반려동물 흔적을 정밀 분석합니다." },
-              { step: "02", title: "딥 클리닝 (건식)", desc: "고성능 헤파 필터 장비로 털, 먼지, 진드기를 강력 흡입합니다." },
-              { step: "03", title: "스팀/세척 (습식)", desc: "친환경 세제와 고온 스팀으로 찌든 오염과 냄새를 제거합니다." },
-              { step: "04", title: "토탈 살균 소독", desc: "피톤치드 및 UV 살균으로 쾌적한 환경을 완성합니다." }
+              {
+                id: "01",
+                title: "오존 산화 시공",
+                desc: "오존의 강한 산화력으로 실내 유해가스, 냄새, 세균을 분해하고 저감하는 시공입니다. 포름알데히드, VOC, 세균, 곰팡이를 화학약품 없이 친환경적으로 제거하여 공기질을 개선하는 빠른 효과를 제공합니다.",
+                img: "/process_1.png",
+                delay: 0
+              },
+              {
+                id: "02",
+                title: "바닥 기계장비 청소 및 스팀청소",
+                desc: "전용 세제를 도포한 뒤 찌든 때와 냄새를 유발하는 원인균까지 말끔하게 제거합니다. 스팀과 진공 흡입이 동시에 가능한 전문 장비를 사용하여 바닥과 가구 부분을 집중 케어하며 남은 오염물까지 완벽하게 청소합니다.",
+                img: "/process_2.png",
+                delay: 0.1
+              },
+              {
+                id: "03",
+                title: "컬비 디테일 케어",
+                desc: "특수 브러시가 장착된 컬비 장비로 벽지 사이사이의 털과 비듬, 진드기, 미세먼지 등 눈에 잘 띄지 않는 오염물까지 꼼꼼히 제거합니다. 벽지, 카펫, 매트리스, 소파 등 집안 구석구석을 빠짐없이 케어합니다.",
+                img: "/process_3.png",
+                delay: 0.2
+              },
+              {
+                id: "04",
+                title: "반응촉진 작업 (냄새 탈취 작업)",
+                desc: "청소 후에도 남아 있을 수 있는 냄새의 원인을 제거하기 위해 특수 반응촉진제를 집안 전체 공간에 분사합니다. 공기 중이나 표면에 남은 냄새 성분과 반응하여 냄새를 중화하고 근본적으로 분해합니다.",
+                img: "/process_4.png",
+                delay: 0.3
+              },
+              {
+                id: "05",
+                title: "에어컨 청소 작업",
+                desc: "에어컨 오염도에 따라 최적화된 방법으로 진행됩니다. 오염도가 적을 시 필터 세척 및 고압 스팀 케어를 진행하며, 오염도가 심할 경우 내부까지 완전 분해하여 정밀 청소를 진행합니다.",
+                img: "/process_5.png",
+                delay: 0.4
+              },
+              {
+                id: "06",
+                title: "무료 서비스 (Special Kit)",
+                desc: "화장실 및 주방 전체 고압 스팀 작업, 피톤치드 연무 작업은 물론, 주방 및 화장실 수전 나노코팅 서비스까지 멍크린만의 특별한 혜택을 제공해 드립니다.",
+                img: "/process_6.png",
+                delay: 0.5
+              }
             ].map((step, idx) => (
               <motion.div
-                key={idx}
-                className="process-step-item"
+                key={step.id}
+                className={`timeline-item ${idx % 2 === 1 ? 'reverse' : ''}`}
                 {...fadeInUp}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: step.delay }}
                 style={{
-                  textAlign: 'center',
-                  background: '#f8fbfc',
-                  padding: '40px 20px',
-                  borderRadius: '20px',
-                  border: '1px solid #eef2f5'
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '60px',
+                  marginBottom: '100px'
                 }}
               >
-                <div style={{
-                  fontSize: '1rem',
-                  fontWeight: 900,
-                  color: 'var(--primary)',
-                  marginBottom: '15px',
-                  opacity: 0.5
-                }}>STEP {step.step}</div>
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '15px' }}>{step.title}</h4>
-                <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.6, wordBreak: 'keep-all' }}>{step.desc}</p>
+                <div className="timeline-img-box" style={{ flex: 1.2 }}>
+                  <div style={{
+                    width: '100%',
+                    minHeight: '450px',
+                    background: '#fcfcfc',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    boxShadow: '0 15px 45px rgba(0,0,0,0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid #f0f0f0',
+                    position: 'relative'
+                  }}>
+                    <img
+                      src={step.img}
+                      alt={step.title}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        maxHeight: '600px',
+                        objectFit: 'contain',
+                        display: 'block'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          const icon = document.createElement('div');
+                          icon.innerHTML = `<span style="color:#aaa; font-weight:600;">[ ${step.id}단계 관련 이미지를 넣어주세요 ]</span>`;
+                          parent.appendChild(icon);
+                        }
+                      }}
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      top: '20px',
+                      left: '20px',
+                      background: 'var(--primary)',
+                      color: '#fff',
+                      padding: '8px 20px',
+                      borderRadius: '50px',
+                      fontSize: '0.9rem',
+                      fontWeight: 800,
+                      zIndex: 1
+                    }}>STEP {step.id}</div>
+                  </div>
+                </div>
+                <div className="timeline-text-box" style={{ flex: 1, textAlign: 'left' }}>
+                  <h4 style={{ fontSize: '1.8rem', fontWeight: 850, color: '#111', marginBottom: '25px', letterSpacing: '-0.5px' }}>{step.title}</h4>
+                  <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: '#555', wordBreak: 'keep-all' }}>
+                    {step.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. Floor Cleaning Specialization */}
-      <section className="section floor-special-section" style={{ backgroundColor: '#f8f9fa', padding: '120px 0' }}>
-        <div className="container">
-          <motion.div className="floor-content" {...fadeInUp} style={{ textAlign: 'center' }}>
-            <h2 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '70px', color: '#333' }}>
-              반려동물 가족의 고민 <span style={{ color: 'var(--primary)' }}>한번에 해결!</span>
-            </h2>
-            <div className="floor-circles" style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '40px',
-              flexWrap: 'wrap'
-            }}>
-              <div className="circle-item" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', width: '230px' }}>
-                <div className="circle-img" style={{
-                  width: '220px',
-                  height: '220px',
-                  borderRadius: '50%',
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?auto=format&fit=crop&q=80&w=400)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
-                  border: '6px solid #fff'
-                }}></div>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#444', lineHeight: 1.4, wordBreak: 'keep-all' }}>집안 곳곳 박힌<br />반려동물의 미세 털</span>
-              </div>
-              <div className="circle-item" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', width: '230px' }}>
-                <div className="circle-img" style={{
-                  width: '220px',
-                  height: '220px',
-                  borderRadius: '50%',
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?auto=format&fit=crop&q=80&w=400)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
-                  border: '6px solid #fff'
-                }}></div>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#444', lineHeight: 1.4, wordBreak: 'keep-all' }}>배어있는 특유의<br />찌든 취기(Odor)</span>
-              </div>
-              <div className="circle-item" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', width: '230px' }}>
-                <div className="circle-img" style={{
-                  width: '220px',
-                  height: '220px',
-                  borderRadius: '50%',
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=400)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
-                  border: '6px solid #fff'
-                }}></div>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#444', lineHeight: 1.4, wordBreak: 'keep-all' }}>공기 중 떠다니는<br />비듬과 초미세먼지</span>
-              </div>
-              <div className="circle-item" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', width: '230px' }}>
-                <div className="circle-img" style={{
-                  width: '220px',
-                  height: '220px',
-                  borderRadius: '50%',
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1548128591-2dc04735391a?auto=format&fit=crop&q=80&w=400)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
-                  border: '6px solid #fff'
-                }}></div>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#444', lineHeight: 1.4, wordBreak: 'keep-all' }}>알레르기를 유발하는<br />진드기와 유해 세균</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* 7. Additional Galleries */}
-      <section className="section gallery-section" style={{ padding: '120px 0' }}>
-        <div className="container">
-          <div className="gallery-row" style={{ display: 'flex', gap: '40px', marginBottom: '80px' }}>
-            <div className="gallery-item-half" style={{ flex: 1 }}>
-              <div className="gallery-header small">
-                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--secondary)', marginBottom: '20px' }}>02. 베란다 및 창틀 케어</h3>
-              </div>
-              <div className="gallery-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=600" alt="Balcony 1" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }} />
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600" alt="Balcony 2" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }} />
-              </div>
-            </div>
-            <div className="gallery-item-half" style={{ flex: 1 }}>
-              <div className="gallery-header small">
-                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--secondary)', marginBottom: '20px' }}>03. 욕실 및 살균 케어</h3>
-              </div>
-              <div className="gallery-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                <img src="https://images.unsplash.com/photo-1584622781564-1d9876a1dfd1?auto=format&fit=crop&q=80&w=600" alt="Bathroom 1" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }} />
-                <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=600" alt="Bathroom 2" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }} />
-              </div>
-            </div>
-          </div>
 
-          <div className="gallery-row" style={{ marginTop: '80px' }}>
-            <div className="gallery-full" style={{ width: '100%' }}>
-              <div className="gallery-header small" style={{ marginBottom: '30px' }}>
-                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--secondary)', marginBottom: '10px' }}>04. 거실 및 전체 바닥 케어</h3>
-                <p style={{ fontSize: '1.1rem', color: '#666' }}>전문 장비를 통해 구석구석 틈새까지 완벽하게 먼지를 흡입하고 물세척을 진행합니다.</p>
-              </div>
-              <div className="gallery-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&q=80&w=800" alt="Living 1" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '15px' }} />
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" alt="Living 2" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '15px' }} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
 
       {/* 8. Contact CTA */}

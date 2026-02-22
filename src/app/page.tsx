@@ -21,17 +21,17 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {
-      img: "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=1920",
+      img: "/public_hero.png",
       text1: "반려동물과 사람이 함께 행복한<br />전문 홈클리닝",
       text2: "우리 아이가 숨쉬는 공간,<br />멍크린이 책임집니다",
     },
     {
-      img: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&q=80&w=1920",
-      text1: "컬비(Kirby) 전용 장비 도입",
+      img: "/public_hero2.jpeg",
+      text1: "특화된 전문장비 도입",
       text2: "보이지 않는 진드기부터<br />털 한 톨까지 완벽 제거",
     },
     {
-      img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=1920",
+      img: "/public_hero3.png",
       text1: "친환경 케어 & 오존 살균",
       text2: "무독성 세제로 안심하고 맡기는<br />프리미엄 청소",
     },
@@ -48,7 +48,7 @@ export default function Home() {
     { id: "moving", name: "이사청소", desc: "\"이전 거주자의 흔적을 지우는 깔끔한 시작!\"", img: "/services/moving.png" },
     { id: "residential", name: "거주청소", desc: "\"우리 가족의 건강을 지키는 프리미엄 케어!\"", img: "/services/residential.png" },
     { id: "baby", name: "아기맞이청소", desc: "\"면역력 약한 아기를 위한 안심 살균!\"", img: "/services/baby.png" },
-    { id: "rainbow", name: "무지개청소", desc: "\"냄새와 세균 걱정 없는 쾌적한 펫 환경!\"", img: "/services/rainbow.png" },
+    { id: "rainbow", name: "무지개다리 청소", desc: "\"냄새와 세균 걱정 없는 쾌적한 펫 환경!\"", img: "/services/rainbow.png" },
     { id: "commercial", name: "상가청소", desc: "\"성공을 부르는 청결한 비즈니스 공간!\"", img: "/services/commercial.png" },
   ];
 

@@ -5,10 +5,10 @@ export default function ReviewsPage() {
     { id: 1, img: "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&q=60&w=600", title: "독일 키엘사 친환경 세제로 안심 케어", desc: "반려동물이 있는 집도 걱정 없는 멍크린 클리닝" },
     { id: 2, img: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=60&w=600", title: "말끔한 새 공간으로의 완벽한 변신", desc: "보이지 않는 미세먼지까지 꼼꼼하게 제거했습니다" },
     { id: 3, img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=60&w=600", title: "이사 전 필수! 프리미엄 입주청소 세트", desc: "멍크린의 전문 장비로 완성하는 깨끗한 첫 시작" },
-    { id: 4, img: "https://images.unsplash.com/photo-1585913661204-6204c3c3a9a2?auto=format&fit=crop&q=60&w=600", title: "구석구석 보이지 않는 사각지대까지 해결", desc: "전등 갓 내부부터 하수구 안쪽까지 완벽 살균" },
+    { id: 4, img: "https://images.unsplash.com/photo-1550963295-019d8a8a61c5?auto=format&fit=crop&q=60&w=600", title: "구석구석 보이지 않는 사각지대까지 해결", desc: "전등 갓 내부부터 하수구 안쪽까지 완벽 살균" },
     { id: 5, img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=60&w=600", title: "처음부터 끝까지 섬세한 스팀 살균 케어", desc: "독한 화학 약품 대신 고온 스팀으로 안심 살균" },
-    { id: 6, img: "https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=60&w=600", title: "전문가의 손길로 완성되는 디테일 청소", desc: "사소한 틈새 하나 놓치지 않는 정성스러운 손길" },
-    { id: 7, img: "https://images.unsplash.com/photo-1556911220-e156211ca990?auto=format&fit=crop&q=60&w=600", title: "비즈니스 효율을 높이는 쾌적한 사무실 청소", desc: "성동구 지식산업센터 등 대형 사무공간 전문 관리" },
+    { id: 6, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=60&w=600", title: "전문가의 손길로 완성되는 디테일 청소", desc: "사소한 틈새 하나 놓치지 않는 정성스러운 손길" },
+    { id: 7, img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=60&w=600", title: "비즈니스 효율을 높이는 쾌적한 사무실 청소", desc: "성동구 지식산업센터 등 대형 사무공간 전문 관리" },
     { id: 8, img: "https://images.unsplash.com/photo-1540331547168-8b63109225b7?auto=format&fit=crop&q=60&w=600", title: "합리적인 가격으로 누리는 최상의 청소 품질", desc: "부담 없는 가격과 압도적인 만족도, 멍크린입니다" },
   ];
 

@@ -1,13 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { loadTossPayments } from "@tosspayments/payment-sdk";
+import { useEffect, useState, useRef } from "react";
+import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
 import { CreditCard, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function PaymentPage() {
-  const [clientKey] = useState("test_ck_D4yKeq5bgrpoYOn6LJlV8W6vlRe2"); // 테스트 키
+  const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY || "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
   const [quantity, setQuantity] = useState<number | string>(1);
+  const [useCoupon, setUseCoupon] = useState(false);
   const unitPrice = 10000;
+  const couponDiscount = 5000;
+
+  const [ready, setReady] = useState(false);
+  const [widgets, setWidgets] = useState<any>(null);
+
+  const getAmount = () => {
+    const q = typeof quantity === 'string' ? (parseInt(quantity) || 1) : quantity;
+    const baseAmount = unitPrice * q;
+    return useCoupon ? Math.max(0, baseAmount - couponDiscount) : baseAmount;
+  };
+
+  useEffect(() => {
+    async function fetchPaymentWidgets() {
+      try {
+        const tossPayments = await loadTossPayments(clientKey);
+        // 비회원 결제 방식 적용
+        const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
+
+        setWidgets(widgets);
+      } catch (error) {
+        console.error("Error fetching payment widgets:", error);
+      }
+    }
+
+    fetchPaymentWidgets();
+  }, [clientKey]);
+
+  useEffect(() => {
+    async function renderWidgets() {
+      if (widgets == null) return;
+
+      // 금액 설정
+      await widgets.setAmount({
+        currency: "KRW",
+        value: getAmount(),
+      });
+
+      // 결제 수단 렌더링
+      await widgets.renderPaymentMethods({
+        selector: "#payment-method",
+        variantKey: "DEFAULT",
+      });
+
+      // 이용약관 렌더링
+      await widgets.renderAgreement({
+        selector: "#agreement",
+        variantKey: "AGREEMENT",
+      });
+
+      setReady(true);
+    }
+
+    renderWidgets();
+  }, [widgets]);
+
+  // 수량 또는 쿠폰 변경 시 금액 업데이트
+  useEffect(() => {
+    if (widgets && ready) {
+      widgets.setAmount({
+        currency: "KRW",
+        value: getAmount(),
+      });
+    }
+  }, [quantity, useCoupon, widgets, ready]);
 
   const handleQuantityInput = (val: string) => {
     if (val === "") {
@@ -30,17 +95,17 @@ export default function PaymentPage() {
   };
 
   const handlePayment = async () => {
-    const finalQuantity = typeof quantity === 'string' ? (parseInt(quantity) || 1) : quantity;
-    try {
-      const tossPayments = await loadTossPayments(clientKey);
+    if (widgets == null || !ready) return;
 
-      await tossPayments.requestPayment("카드", {
-        amount: unitPrice * finalQuantity,
-        orderId: `order-${Math.random().toString(36).slice(2, 9)}`,
-        orderName: `멍크린 프리미엄 청소 ${finalQuantity > 1 ? `(${finalQuantity}개)` : ""}`,
-        customerName: "고객님",
+    try {
+      await widgets.requestPayment({
+        orderId: `order-${Math.random().toString(36).slice(2, 11)}`,
+        orderName: `멍크린 프리미엄 청소${Number(quantity) > 1 ? ` (${quantity}개)` : ""}`,
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`,
+        customerEmail: "customer123@gmail.com",
+        customerName: "고객님",
+        customerMobilePhone: "01012341234",
       });
     } catch (err) {
       console.error("결제 요청 실패:", err);
@@ -83,8 +148,20 @@ export default function PaymentPage() {
               </div>
             </div>
 
+            <div className="coupon-box" style={{ marginBottom: '20px', textAlign: 'left', padding: '15px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.95rem', fontWeight: 600, color: '#475569' }}>
+                <input
+                  type="checkbox"
+                  checked={useCoupon}
+                  onChange={(e) => setUseCoupon(e.target.checked)}
+                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                />
+                5,000원 할인 쿠폰 적용
+              </label>
+            </div>
+
             <div className="price-tag">
-              <span className="amount">{(unitPrice * (Number(quantity) || 1)).toLocaleString()}</span>
+              <span className="amount">{(getAmount()).toLocaleString()}</span>
               <span className="currency">원</span>
             </div>
           </div>
@@ -104,6 +181,10 @@ export default function PaymentPage() {
             </div>
           </div>
 
+          {/* Toss Payments Widget UI */}
+          <div id="payment-method" style={{ marginBottom: '30px' }} />
+          <div id="agreement" style={{ marginBottom: '30px' }} />
+
           <div className="payment-guide">
             <div className="guide-header">
               <ShieldCheck size={20} color="#059669" />
@@ -112,7 +193,12 @@ export default function PaymentPage() {
             <p>토스페이먼츠의 보안 결제 시스템을 통해 안전하게 처리됩니다.</p>
           </div>
 
-          <button className="pay-btn" onClick={handlePayment}>
+          <button
+            className="pay-btn"
+            onClick={handlePayment}
+            disabled={!ready}
+            style={{ opacity: ready ? 1 : 0.6, cursor: ready ? 'pointer' : 'not-allowed' }}
+          >
             <CreditCard size={20} />
             {(unitPrice * (Number(quantity) || 1)).toLocaleString()}원 결제하기
           </button>
@@ -146,7 +232,7 @@ export default function PaymentPage() {
           opacity: 0.9;
         }
         .payment-container {
-          max-width: 600px;
+          max-width: 650px;
           margin: -80px auto 0;
           position: relative;
           z-index: 10;
@@ -180,17 +266,16 @@ export default function PaymentPage() {
           color: #1e293b;
           margin-bottom: 20px;
         }
-        .price-tag {
-          color: #0f172a;
-        }
         .amount {
           font-size: 3rem;
           font-weight: 900;
+          color: #0f172a;
         }
         .currency {
           font-size: 1.5rem;
           font-weight: 700;
           margin-left: 5px;
+          color: #0f172a;
         }
         .quantity-control {
           display: flex;
@@ -243,11 +328,6 @@ export default function PaymentPage() {
           outline: none;
           -moz-appearance: textfield;
         }
-        .selector input::-webkit-outer-spin-button,
-        .selector input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
         .service-details {
           margin-bottom: 40px;
         }
@@ -291,10 +371,9 @@ export default function PaymentPage() {
           align-items: center;
           justify-content: center;
           gap: 12px;
-          cursor: pointer;
           transition: all 0.3s;
         }
-        .pay-btn:hover {
+        .pay-btn:hover:not(:disabled) {
           background: #0f172a;
           transform: translateY(-2px);
           box-shadow: 0 10px 20px rgba(0,0,0,0.1);

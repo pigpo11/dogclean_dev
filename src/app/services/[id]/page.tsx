@@ -60,7 +60,7 @@ export default function ServiceDetailPage() {
                   <p className="service-desc">{service.desc.split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}</p>
                 </div>
                 <div className="intro-image-side">
-                  <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=800" alt={service.title} />
+                  <img src={service.img} alt={service.title} />
                 </div>
               </div>
             </div>
@@ -68,18 +68,23 @@ export default function ServiceDetailPage() {
         </section>
 
         {/* Features Grid */}
-        <section className="section bg-light">
-          <div className="container">
+        <section className="section bg-white features-section-new">
+          <div className="container" style={{ maxWidth: '1200px' }}>
             <div className="section-header-centered">
-              <h2 className="section-title-main">{service.title} <span className="highlight">특장점</span></h2>
+              <h2 className="scope-title-custom">
+                {service.title} <span className="blue-highlight">특장점</span>
+              </h2>
             </div>
-            <div className="features-grid-8">
+            <div className="scope-grid-custom">
               {service.features.map((feature, i) => (
-                <motion.div key={i} className="feature-item" {...fadeInUp} transition={{ delay: i * 0.05 }}>
-                  <div className="feature-icon-box">{feature.icon}</div>
-                  <div className="feature-text">
-                    <h5>{feature.title}</h5>
-                    <p>{feature.desc}</p>
+                <motion.div key={i} className="scope-item-custom" {...fadeInUp} transition={{ delay: i * 0.05 }}>
+                  <div className="scope-icon-box-custom">{feature.icon}</div>
+                  <div className="scope-content-custom">
+                    <div className="scope-title-wrap-custom">
+                      <h5>{feature.title}</h5>
+                      <div className="title-underline"></div>
+                    </div>
+                    <p style={{ whiteSpace: 'pre-line' }}>{feature.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -93,21 +98,80 @@ export default function ServiceDetailPage() {
             <div className="section-header-centered">
               <h2 className="section-title-main">{service.title} <span className="highlight">진행 과정</span></h2>
             </div>
-            <div className="process-wrapper">
-              <div className="process-timeline-line"></div>
-              <div className="process-steps">
+            <div className="process-wrapper" style={{ position: 'relative', padding: '60px 0', maxWidth: '1200px', margin: '0 auto' }}>
+              <div className="process-timeline-line" style={{
+                position: 'absolute',
+                top: '85px',
+                left: '7%',
+                right: '7%',
+                height: '2px',
+                backgroundColor: '#ddd',
+                zIndex: 1,
+                overflow: 'hidden'
+              }}>
+                <motion.div
+                  className="process-progress-fill"
+                  style={{ height: '100%', backgroundColor: 'var(--primary)', width: 0 }}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
+              </div>
+              <div className="process-steps" style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', zIndex: 2 }}>
                 {service.process.map((step, i) => (
-                  <div key={i} className="process-step-item">
-                    <div className="step-number-node">
+                  <motion.div
+                    key={i}
+                    className="process-step-item"
+                    style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 15px' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.5 }}
+                  >
+                    <div className="step-number-node" style={{
+                      width: '50px',
+                      height: '50px',
+                      backgroundColor: 'var(--primary)',
+                      color: 'white',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.1rem',
+                      fontWeight: 800,
+                      marginBottom: '30px',
+                      boxShadow: '0 5px 15px rgba(0, 174, 239, 0.3)',
+                      position: 'relative',
+                      zIndex: 3
+                    }}>
                       <span className="step-num">0{i + 1}</span>
                     </div>
                     <div className="step-content">
-                      <p className="step-label">{step.label}</p>
-                      <div className="step-thumb">
-                        <img src={step.img} alt={step.label} />
+                      <p className="step-label" style={{
+                        fontSize: '1rem',
+                        fontWeight: 800,
+                        color: '#333',
+                        marginBottom: '25px',
+                        height: '2.4rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        lineHeight: '1.2',
+                        wordBreak: 'keep-all'
+                      }}>{step.label}</p>
+                      <div className="step-thumb" style={{
+                        width: '100%',
+                        aspectRatio: '4 / 3',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 20px rgba(0,0,0,0.08)',
+                        backgroundColor: '#f8f9fa'
+                      }}>
+                        <img src={step.img} alt={step.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -115,17 +179,22 @@ export default function ServiceDetailPage() {
         </section>
 
         {/* Scope & Methods */}
-        <section className="section bg-light">
-          <div className="container">
+        <section className="section bg-white scope-section">
+          <div className="container" style={{ maxWidth: '1200px' }}>
             <div className="section-header-centered">
-              <h2 className="section-title-main">{service.title} <span className="highlight">범위와 방법</span></h2>
+              <h2 className="scope-title-custom">
+                {service.title} <span className="blue-highlight">범위와 방법</span>
+              </h2>
             </div>
-            <div className="scope-grid">
+            <div className="scope-grid-custom">
               {service.scope.map((item, i) => (
-                <motion.div key={i} className="scope-item" {...fadeInUp} transition={{ delay: i * 0.1 }}>
-                  <div className="scope-icon-wrap">{item.icon}</div>
-                  <div className="scope-text">
-                    <h5>{item.title}</h5>
+                <motion.div key={i} className="scope-item-custom" {...fadeInUp} transition={{ delay: i * 0.1 }}>
+                  <div className="scope-icon-box-custom">{item.icon}</div>
+                  <div className="scope-content-custom">
+                    <div className="scope-title-wrap-custom">
+                      <h5>{item.title}</h5>
+                      <div className="title-underline"></div>
+                    </div>
                     <p style={{ whiteSpace: 'pre-line' }}>{item.desc}</p>
                   </div>
                 </motion.div>
@@ -135,15 +204,25 @@ export default function ServiceDetailPage() {
         </section>
 
         {/* Pricing CTA */}
-        <section className="section pricing-cta-section">
+        <section className="section pricing-custom-section">
           <div className="container">
-            <div className="pricing-box">
-              <h2 className="pricing-title">{service.title} 가격안내</h2>
-              <p className="pricing-subtitle">전화상담으로 보다 정확한 견적을 받아보세요!</p>
-              <div className="cta-btns">
-                <Link href="/estimate" className="btn btn-dark">간편견적 확인</Link>
-                <a href="tel:1661-0959" className="btn btn-primary-outline">전화상담 신청</a>
+            <div className="pricing-content-wrap">
+              <div className="pricing-title-area">
+                <div className="pricing-line"></div>
+                <h2 className="pricing-title-new">
+                  {service.title} <span className="blue-point">가격안내</span>
+                </h2>
+                <div className="pricing-line"></div>
               </div>
+
+              <div className="pricing-btn-group">
+                <a href="tel:1661-0959" className="pricing-btn pricing-btn-grey">1661-0959</a>
+                <a href="/estimate" className="pricing-btn pricing-btn-blue">
+                  간편 견적 <ArrowRight size={18} style={{ marginLeft: '10px' }} />
+                </a>
+              </div>
+
+              <p className="pricing-bottom-desc">전화상담으로 보다 정확한 견적을 받아보세요!</p>
             </div>
           </div>
         </section>
@@ -271,54 +350,26 @@ export default function ServiceDetailPage() {
         .section-title-main .highlight {
           color: var(--primary);
         }
-        .features-grid-8 {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 30px;
-        }
-        .feature-item {
-          background: white;
-          padding: 40px 25px;
-          border-radius: 20px;
-          text-align: center;
-          transition: transform 0.3s;
-          border: 1px solid #eee;
-        }
-        .feature-item:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-        }
-        .feature-icon-box {
-          color: var(--primary);
-          margin-bottom: 25px;
-          display: flex;
-          justify-content: center;
-        }
-        .feature-text h5 {
-          font-size: 1.1rem;
-          font-weight: 800;
-          margin-bottom: 12px;
-          color: #111;
-          word-break: keep-all;
-        }
-        .feature-text p {
-          font-size: 0.95rem;
-          color: #666;
-          line-height: 1.6;
-          word-break: keep-all;
-        }
         .process-wrapper {
           position: relative;
-          padding: 40px 0;
+          padding: 60px 0;
+          max-width: 1200px;
+          margin: 0 auto;
         }
         .process-timeline-line {
           position: absolute;
-          top: 75px;
-          left: 5%;
-          right: 5%;
+          top: 83px; /* 숫자 간 정중앙 정렬을 위해 85px에서 83px로 미세 조정 */
+          left: 7.2%; /* 첫 번째 원의 정중앙 */
+          right: 7.2%; /* 마지막 원의 정중앙 */
           height: 2px;
-          background: #e9ecef;
+          background: #ddd; /* 선이 더 잘 보이도록 색상 변경 */
           z-index: 1;
+          overflow: hidden;
+        }
+        .process-progress-fill {
+          height: 100%;
+          background: var(--primary);
+          width: 0;
         }
         .process-steps {
           display: flex;
@@ -332,7 +383,7 @@ export default function ServiceDetailPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          max-width: 14%;
+          padding: 0 15px; /* 이미지 간 간격 더 확보 */
         }
         .step-number-node {
           width: 50px;
@@ -343,116 +394,201 @@ export default function ServiceDetailPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           font-weight: 800;
-          margin-bottom: 25px;
-          box-shadow: 0 5px 15px rgba(0, 145, 255, 0.3);
+          margin-bottom: 30px;
+          box-shadow: 0 5px 15px rgba(0, 174, 239, 0.3);
+          position: relative;
+          z-index: 3;
         }
         .step-label {
-          font-size: 0.95rem;
+          font-size: 1rem;
           font-weight: 800;
           color: #333;
-          margin-bottom: 20px;
-          height: 48px;
+          margin-bottom: 25px;
+          height: 2.4rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          line-height: 1.3;
+          line-height: 1.2;
+          word-break: keep-all;
         }
         .step-thumb {
           width: 100%;
-          height: 100px;
-          border-radius: 10px;
+          aspect-ratio: 4 / 3;
+          border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+          background-color: #f8f9fa;
         }
         .step-thumb img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        .scope-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 30px;
-        }
-        .scope-item {
-          background: white;
-          padding: 35px;
-          border-radius: 15px;
-          display: flex;
-          gap: 25px;
-          border: 1px solid #f0f0f0;
-          box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-        }
-        .scope-icon-wrap {
-          color: var(--primary);
-          opacity: 0.8;
-          flex-shrink: 0;
-        }
-        .scope-text h5 {
-          font-size: 1.3rem;
-          font-weight: 900;
-          margin-bottom: 12px;
-          color: #111;
-        }
-        .scope-text p {
-          font-size: 1rem;
-          color: #555;
-          line-height: 1.7;
-        }
-        .pricing-cta-section {
-          padding-top: 50px;
+        .scope-section {
+          border-top: 1px solid #eeeeee;
+          padding-top: 100px;
           padding-bottom: 100px;
         }
-        .pricing-box {
-          background: #f8f9fa;
-          padding: 80px 40px;
-          border-radius: 30px;
+        .scope-title-custom {
+          font-size: 3rem;
+          font-weight: 800;
+          color: #333;
+          margin-bottom: 80px;
+        }
+        .scope-title-custom .blue-highlight {
+          color: #00AEEF;
+        }
+        .scope-grid-custom {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px 80px;
+        }
+        .scope-item-custom {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 25px;
+          width: 100%;
+        }
+        .scope-icon-box-custom {
+          width: 80px;
+          height: 80px;
+          background-color: #f8f9fa;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #555;
+          border-radius: 12px;
+          margin: 0 auto;
+        }
+        .scope-content-custom {
+          width: 100%;
           text-align: center;
-          box-shadow: inset 0 0 40px rgba(0,0,0,0.02);
         }
-        .pricing-title {
-          font-size: 2.2rem;
-          font-weight: 900;
-          margin-bottom: 15px;
+        .scope-title-wrap-custom {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        .scope-title-wrap-custom h5 {
+          font-size: 1.6rem;
+          font-weight: 800;
           color: #111;
+          margin-bottom: 12px;
         }
-        .pricing-subtitle {
-          font-size: 1.25rem;
-          color: #666;
+        .title-underline {
+          width: 100%;
+          height: 3px;
+          background-color: #00AEEF;
+        }
+        .scope-content-custom p {
+          font-size: 1.1rem;
+          color: #777;
+          line-height: 1.8;
+          word-break: keep-all;
+          text-align: left;
+          max-width: 380px;
+          margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+          .scope-grid-custom {
+            grid-template-columns: 1fr;
+            gap: 50px;
+          }
+          .scope-item-custom {
+            flex-direction: column;
+            gap: 20px;
+          }
+          .scope-icon-box-custom {
+            width: 80px;
+            height: 80px;
+          }
+          .scope-title-custom {
+            font-size: 2rem;
+          }
+        }
+        .pricing-custom-section {
+          background-color: #f2f7fa;
+          padding: 100px 0;
+          text-align: center;
+        }
+        .pricing-content-wrap {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+        .pricing-title-area {
           margin-bottom: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
         }
-        .cta-btns {
+        .pricing-line {
+          width: 140px;
+          height: 1px;
+          background-color: #d1dadd;
+        }
+        .pricing-title-new {
+          font-size: 2.22rem;
+          font-weight: 800;
+          color: #333;
+          margin: 10px 0;
+        }
+        .pricing-title-new .blue-point {
+          color: #00AEEF;
+        }
+        .pricing-btn-group {
           display: flex;
           justify-content: center;
-          gap: 20px;
+          gap: 15px;
+          margin-bottom: 25px;
         }
-        .btn {
-          padding: 18px 45px;
+        .pricing-btn {
+          padding: 15px 45px;
           border-radius: 50px;
           font-size: 1.1rem;
-          font-weight: 800;
-          transition: all 0.3s;
+          font-weight: 700;
+          text-decoration: none;
+          min-width: 220px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
         }
-        .btn-dark {
-          background: #333;
+        .pricing-btn-grey {
+          background-color: #808080;
           color: white;
         }
-        .btn-dark:hover {
-          background: #000;
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .pricing-btn-grey:hover {
+          background-color: #666666;
+          transform: translateY(-2px);
         }
-        .btn-primary-outline {
-          border: 2px solid var(--primary);
-          color: var(--primary);
-        }
-        .btn-primary-outline:hover {
-          background: var(--primary);
+        .pricing-btn-blue {
+          background-color: #00AEEF;
           color: white;
-          transform: translateY(-3px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .pricing-btn-blue:hover {
+          background-color: #008ec3;
+          transform: translateY(-2px);
+        }
+        .pricing-bottom-desc {
+          font-size: 0.95rem;
+          color: #666;
+          font-weight: 600;
+        }
+        @media (max-width: 768px) {
+          .pricing-btn-group {
+            flex-direction: column;
+            align-items: center;
+          }
+          .pricing-btn {
+            width: 100%;
+            max-width: 300px;
+          }
         }
         .cta-section {
           background: #f8f9fa;
