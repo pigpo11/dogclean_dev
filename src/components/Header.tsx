@@ -36,15 +36,12 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="desktop-nav">
           <ul className="nav-list">
-            <li>
-              <Link href="/about" className="nav-link">멍크린 소개</Link>
-            </li>
             <li
               className="nav-item-dropdown"
               onMouseEnter={() => setIsServicesOpen(true)}
               onMouseLeave={() => setIsServicesOpen(false)}
             >
-              <Link href="/services" className="nav-link">
+              <Link href="/#services-list" className="nav-link">
                 전문 청소 소개 <ChevronDown size={16} style={{ marginLeft: 4, verticalAlign: 'middle', transition: 'transform 0.3s', transform: isServicesOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
               </Link>
               {isServicesOpen && (
@@ -87,11 +84,6 @@ export default function Header() {
         <div className="mobile-menu">
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">
-              <li>
-                <Link href="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  멍크린 소개
-                </Link>
-              </li>
               <li>
                 <button
                   className="mobile-nav-link mobile-dropdown-toggle"
