@@ -161,7 +161,7 @@ export default function AboutPage() {
           <div className="section-header" style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h2 style={{ fontSize: '1.25rem', color: 'var(--primary)', fontWeight: 700, marginBottom: '15px' }}>PREMIUM WORKFLOW</h2>
             <h3 style={{ fontSize: '2.8rem', fontWeight: 900, color: '#111', wordBreak: 'keep-all' }}>
-              멍크린만의 <span style={{ color: 'var(--primary)' }}>6단계 정밀 케어</span> 공정
+              멍크린만의 <span style={{ color: 'var(--primary)' }}>5단계 정밀 케어</span> 공정
             </h3>
             <p style={{ marginTop: '20px', fontSize: '1.15rem', color: '#666' }}>단순한 청소를 넘어 전문 장비와 기술력으로 완벽한 공간을 만듭니다.</p>
           </div>
@@ -172,111 +172,80 @@ export default function AboutPage() {
                 id: "01",
                 title: "오존 산화 시공",
                 desc: "오존의 강한 산화력으로 실내 유해가스, 냄새, 세균을 분해하고 저감하는 시공입니다. 포름알데히드, VOC, 세균, 곰팡이를 화학약품 없이 친환경적으로 제거하여 공기질을 개선하는 빠른 효과를 제공합니다.",
-                img: "/process_1.png",
+                img: "/Process_1.jpg",
                 delay: 0
               },
               {
                 id: "02",
                 title: "바닥 기계장비 청소 및 스팀청소",
                 desc: "전용 세제를 도포한 뒤 찌든 때와 냄새를 유발하는 원인균까지 말끔하게 제거합니다. 스팀과 진공 흡입이 동시에 가능한 전문 장비를 사용하여 바닥과 가구 부분을 집중 케어하며 남은 오염물까지 완벽하게 청소합니다.",
-                img: "/process_2.png",
+                img: "/Process_2.gif",
                 delay: 0.1
               },
               {
                 id: "03",
                 title: "컬비 디테일 케어",
                 desc: "특수 브러시가 장착된 컬비 장비로 벽지 사이사이의 털과 비듬, 진드기, 미세먼지 등 눈에 잘 띄지 않는 오염물까지 꼼꼼히 제거합니다. 벽지, 카펫, 매트리스, 소파 등 집안 구석구석을 빠짐없이 케어합니다.",
-                img: "/process_3.png",
+                img: "/Process_3.gif",
                 delay: 0.2
               },
               {
                 id: "04",
                 title: "반응촉진 작업 (냄새 탈취 작업)",
                 desc: "청소 후에도 남아 있을 수 있는 냄새의 원인을 제거하기 위해 특수 반응촉진제를 집안 전체 공간에 분사합니다. 공기 중이나 표면에 남은 냄새 성분과 반응하여 냄새를 중화하고 근본적으로 분해합니다.",
-                img: "/process_4.png",
+                img: "/Process_4.gif",
                 delay: 0.3
               },
               {
                 id: "05",
-                title: "에어컨 청소 작업",
-                desc: "에어컨 오염도에 따라 최적화된 방법으로 진행됩니다. 오염도가 적을 시 필터 세척 및 고압 스팀 케어를 진행하며, 오염도가 심할 경우 내부까지 완전 분해하여 정밀 청소를 진행합니다.",
-                img: "/process_5.png",
-                delay: 0.4
-              },
-              {
-                id: "06",
                 title: "무료 서비스 (Special Kit)",
                 desc: "화장실 및 주방 전체 고압 스팀 작업, 피톤치드 연무 작업은 물론, 주방 및 화장실 수전 나노코팅 서비스까지 멍크린만의 특별한 혜택을 제공해 드립니다.",
-                img: "/process_6.png",
-                delay: 0.5
+                imgs: ["/Process_6.gif", "/Process_6_1.jpg", "/Process_6_2.gif", "/Process_6_3.gif"],
+                delay: 0.4
               }
             ].map((step, idx) => (
               <motion.div
                 key={step.id}
-                className={`timeline-item ${idx % 2 === 1 ? 'reverse' : ''}`}
+                className={`timeline-item ${idx % 2 === 1 ? "reverse" : ""}`}
                 {...fadeInUp}
                 transition={{ delay: step.delay }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '60px',
-                  marginBottom: '100px'
-                }}
               >
-                <div className="timeline-img-box" style={{ flex: 1.2 }}>
-                  <div style={{
-                    width: '100%',
-                    minHeight: '450px',
-                    background: '#fcfcfc',
-                    borderRadius: '24px',
-                    overflow: 'hidden',
-                    boxShadow: '0 15px 45px rgba(0,0,0,0.06)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '1px solid #f0f0f0',
-                    position: 'relative'
-                  }}>
-                    <img
-                      src={step.img}
-                      alt={step.title}
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        maxHeight: '600px',
-                        objectFit: 'contain',
-                        display: 'block'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent) {
-                          const icon = document.createElement('div');
-                          icon.innerHTML = `<span style="color:#aaa; font-weight:600;">[ ${step.id}단계 관련 이미지를 넣어주세요 ]</span>`;
-                          parent.appendChild(icon);
-                        }
-                      }}
-                    />
-                    <div style={{
-                      position: 'absolute',
-                      top: '20px',
-                      left: '20px',
-                      background: 'var(--primary)',
-                      color: '#fff',
-                      padding: '8px 20px',
-                      borderRadius: '50px',
-                      fontSize: '0.9rem',
-                      fontWeight: 800,
-                      zIndex: 1
-                    }}>STEP {step.id}</div>
+                <div className="timeline-img-box">
+                  <div className="img-container">
+                    {step.imgs ? (
+                      <div className="imgs-grid">
+                        {step.imgs.map((img, i) => (
+                          <img
+                            key={i}
+                            src={img}
+                            alt={`${step.title} ${i + 1}`}
+                            className="grid-img"
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <img
+                        src={(step as any).img}
+                        alt={step.title}
+                        className="single-img"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                          const parent = target.parentElement;
+                          if (parent) {
+                            const icon = document.createElement("div");
+                            icon.innerHTML = `<span style="color:#aaa; font-weight:600;">[ ${step.id}단계 관련 이미지를 넣어주세요 ]</span>`;
+                            parent.appendChild(icon);
+                          }
+                        }}
+                      />
+                    )}
+                    <div className="step-badge">STEP {step.id}</div>
                   </div>
                 </div>
-                <div className="timeline-text-box" style={{ flex: 1, textAlign: 'left' }}>
-                  <h4 style={{ fontSize: '1.8rem', fontWeight: 850, color: '#111', marginBottom: '25px', letterSpacing: '-0.5px' }}>{step.title}</h4>
-                  <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: '#555', wordBreak: 'keep-all' }}>
-                    {step.desc}
-                  </p>
+                <div className="timeline-text-box">
+                  <h4>{step.title}</h4>
+                  <p>{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -326,11 +295,14 @@ export default function AboutPage() {
           color: white;
           background-size: cover;
           background-position: center;
+          padding: 0 20px;
         }
         .about-hero h1 {
           font-size: 3rem;
           font-weight: 800;
           letter-spacing: -1px;
+          line-height: 1.2;
+          word-break: keep-all;
         }
         .divider {
           width: 60px;
@@ -370,7 +342,9 @@ export default function AboutPage() {
           margin: 0 auto;
         }
         .intro-logo {
-          width: 360px;
+          width: 100%;
+          max-width: 360px;
+          margin: 0 auto;
         }
         .logo-outer-box {
           background: #fdfdfd;
@@ -381,13 +355,13 @@ export default function AboutPage() {
           align-items: center;
           justify-content: center;
           aspect-ratio: 1 / 1;
-          width: 360px;
-          height: 360px;
+          width: 100%;
+          height: auto;
           overflow: hidden;
         }
         .intro-logo-img {
-          max-width: 100%;
-          max-height: 100%;
+          max-width: 80%;
+          max-height: 80%;
           width: auto;
           height: auto;
           display: block;
@@ -405,6 +379,7 @@ export default function AboutPage() {
           margin-bottom: 30px;
           line-height: 1.2;
           color: #333;
+          word-break: keep-all;
         }
         .intro-text h2 span { color: var(--primary); }
         .intro-p-wrap p {
@@ -418,10 +393,12 @@ export default function AboutPage() {
         .section-header {
           text-align: center;
           margin-bottom: 60px;
+          padding: 0 20px;
         }
         .section-header p {
           font-size: 1.2rem;
           color: #777;
+          word-break: keep-all;
         }
 
         .equipment-simple-grid {
@@ -429,177 +406,82 @@ export default function AboutPage() {
           grid-template-columns: 1fr 1fr;
           gap: 40px;
         }
-        .equipment-simple-item {
-          text-align: left;
-        }
-        .simple-img-box img {
-          width: 100%;
-          height: 380px;
-          object-fit: cover;
-          border-radius: 15px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-          margin-bottom: 25px;
-        }
-        .simple-text-box h3 {
-          font-size: 1.5rem;
-          font-weight: 800;
-          margin-bottom: 12px;
-          color: #333;
-        }
-        .simple-text-box p {
-          color: #666;
-          font-size: 1rem;
-          line-height: 1.6;
-          max-width: 420px;
-          word-break: keep-all;
-        }
-
-        .principles-section {
-          background: #fff;
-          padding: 80px 0;
-        }
-        .principles-title {
-          font-size: 2.2rem;
-          font-weight: 800;
-          color: #333;
-          text-align: center;
-          margin-bottom: 50px;
-        }
-        .principles-title span {
-          color: var(--primary);
-        }
-        .principles-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        .principle-card {
-          border: 1px solid #e0e0e0 !important;
-          padding: 60px 30px;
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: center !important;
-          text-align: center !important;
-          background: #fff;
-          transition: transform 0.3s;
-        }
-        .principle-card:hover { transform: translateY(-5px); }
-        .icon-circle-bg {
-          width: 140px;
-          height: 140px;
-          background: #f2f2f2;
-          border-radius: 50%;
+        .timeline-item {
           display: flex;
           align-items: center;
-          justify-content: center;
-          margin-bottom: 35px;
-        }
-        .principle-illustration {
-          width: 80px;
-          height: 80px;
-          object-fit: contain;
-        }
-        .principle-card h4 {
-          font-size: 1.6rem;
-          font-weight: 800;
-          margin-bottom: 20px;
-          color: #111;
-          text-align: center !important;
-        }
-        .principle-card p {
-          font-size: 1.05rem;
-          line-height: 1.7;
-          color: #666;
-          word-break: keep-all;
-          text-align: center !important;
-          margin: 0 auto !important;
-          max-width: 280px;
-        }
-
-        .gallery-header {
-          margin-bottom: 30px;
-          border-left: 5px solid var(--primary);
-          padding-left: 20px;
-        }
-        .gallery-header h3 {
-          font-size: 1.8rem;
-          font-weight: 800;
-          color: var(--secondary);
-        }
-        .gallery-grid-4 {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
-        }
-        .gallery-grid-4 img {
-          width: 100%;
-          height: 250px;
-          object-fit: cover;
-          border-radius: 12px;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .floor-special-section {
-          background-color: #f0f7ff;
-        }
-        .floor-content {
-          text-align: center;
-        }
-        .floor-content h2 {
-          font-size: 2.2rem;
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: 50px;
-        }
-        .floor-circles {
-          display: flex;
-          justify-content: center;
           gap: 60px;
-          flex-wrap: wrap;
+          margin-bottom: 100px;
         }
-        .circle-item {
+        .timeline-item.reverse {
+          flex-direction: row-reverse;
+        }
+        .timeline-img-box {
+          flex: 1.2;
+        }
+        .img-container {
+          width: 100%;
+          min-height: 450px;
+          background: #fcfcfc;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 15px;
+          justify-content: center;
+          border: 1px solid #f0f0f0;
+          position: relative;
         }
-        .circle-img {
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          background-size: cover;
-          background-position: center;
-          border: 4px solid white;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .circle-item span {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #444;
-        }
-
-        .gallery-row {
-          display: flex;
-          gap: 40px;
-        }
-        .gallery-item-half { flex: 1; }
-        .gallery-header.small h3 { font-size: 1.5rem; }
-        .gallery-grid-2 {
+        .imgs-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, 1fr);
           gap: 15px;
-        }
-        .gallery-grid-2 img {
           width: 100%;
-          height: 220px;
-          object-fit: cover;
-          border-radius: 10px;
+          padding: 20px;
         }
-
-        .mt-60 { margin-top: 60px; }
-        .no-padding-bottom { padding-bottom: 0; }
+        .grid-img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 12px;
+          display: block;
+        }
+        .single-img {
+          width: 100%;
+          height: auto;
+          max-height: 600px;
+          object-fit: contain;
+          display: block;
+        }
+        .step-badge {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: var(--primary);
+          color: #fff;
+          padding: 8px 20px;
+          borderRadius: 50px;
+          fontSize: 0.9rem;
+          fontWeight: 800;
+          zIndex: 1;
+        }
+        .timeline-text-box {
+          flex: 1;
+          text-align: left;
+        }
+        .timeline-text-box h4 {
+          font-size: 1.8rem;
+          font-weight: 850;
+          color: #111;
+          margin-bottom: 25px;
+          letter-spacing: -0.5px;
+        }
+        .timeline-text-box p {
+          font-size: 1.15rem;
+          line-height: 1.8;
+          color: #555;
+          word-break: keep-all;
+        }
 
         .cta-image-grid {
           display: grid;
@@ -613,7 +495,7 @@ export default function AboutPage() {
           width: 100%;
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
           cursor: pointer;
         }
         .cta-full-img {
@@ -622,8 +504,91 @@ export default function AboutPage() {
           display: block;
           transition: filter 0.3s ease;
         }
-        @media (max-width: 900px) {
-          .cta-image-grid { grid-template-columns: 1fr; padding: 0 20px; }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+          .timeline-item {
+            gap: 40px;
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .why-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .timeline-item,
+          .timeline-item.reverse {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 30px !important;
+          }
+          .timeline-text-box {
+            text-align: center !important;
+            width: 100% !important;
+          }
+          .timeline-img-box {
+            width: 100% !important;
+            order: -1 !important;
+          }
+          .img-container {
+            min-height: 300px !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .about-hero h1 {
+            font-size: 2rem;
+          }
+          .about-hero p {
+            font-size: 1.1rem !important;
+          }
+          .intro-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+          }
+          .intro-text h2 {
+            font-size: 1.8rem;
+          }
+          .why-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .equipment-simple-grid {
+            grid-template-columns: 1fr;
+          }
+          .simple-img-box img {
+            height: 280px;
+          }
+          .section-title {
+            font-size: 1.8rem !important;
+          }
+          .process-detail-section h3 {
+            font-size: 2rem !important;
+          }
+          .imgs-grid {
+            grid-template-columns: 1fr !important;
+            padding: 15px;
+          }
+          .single-img {
+            max-height: 400px !important;
+          }
+          .cta-image-grid {
+            grid-template-columns: 1fr;
+            padding: 0 20px;
+          }
+          .section {
+            padding: 60px 0;
+          }
+          .intro-logo {
+            width: 200px;
+          }
+          .logo-outer-box {
+            height: 200px;
+            padding: 20px;
+          }
+          .timeline-item {
+            margin-bottom: 60px !important;
+          }
         }
       `}</style>
     </div >

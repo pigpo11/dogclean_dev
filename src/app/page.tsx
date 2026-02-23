@@ -31,9 +31,9 @@ export default function Home() {
       text2: "보이지 않는 진드기부터<br />털 한 톨까지 완벽 제거",
     },
     {
-      img: "/public_hero3.png",
+      img: "/public_hero3.jpeg",
       text1: "친환경 케어 & 오존 살균",
-      text2: "무독성 세제로 안심하고 맡기는<br />프리미엄 청소",
+      text2: "친환경 세제로 안심하고 맡기는<br />프리미엄 청소",
     },
   ];
 
@@ -187,6 +187,7 @@ export default function Home() {
           margin-bottom: 20px;
           text-shadow: 0 2px 4px rgba(0,0,0,0.3);
           color: #fff !important;
+          word-break: keep-all;
         }
         .slide-maintext {
           font-size: 4rem;
@@ -194,6 +195,8 @@ export default function Home() {
           display: block;
           text-shadow: 0 4px 8px rgba(0,0,0,0.5);
           color: #fff !important;
+          line-height: 1.2;
+          word-break: keep-all;
         }
         .slider-nav {
           position: absolute;
@@ -244,6 +247,7 @@ export default function Home() {
           font-size: 0.85rem;
           color: var(--text-muted);
           height: 3rem;
+          word-break: keep-all;
         }
         .service-img-wrap {
           margin: 20px 0;
@@ -300,6 +304,7 @@ export default function Home() {
           margin-bottom: 30px;
           line-height: 1.3;
           text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+          word-break: keep-all;
         }
         .about-text p {
           color: rgba(255,255,255,0.9);
@@ -307,6 +312,7 @@ export default function Home() {
           line-height: 1.8;
           margin-bottom: 40px;
           text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          word-break: keep-all;
         }
         .about-image {
           flex: 1;
@@ -339,6 +345,7 @@ export default function Home() {
         .info-card p {
           color: #777;
           margin-bottom: 20px;
+          word-break: keep-all;
         }
         .card-link {
           color: var(--primary);
@@ -352,19 +359,31 @@ export default function Home() {
         .center-btn { text-align: center; }
         .mt-40 { margin-top: 40px; }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
           .services-grid { grid-template-columns: repeat(3, 1fr); }
         }
+        @media (max-width: 1024px) {
+          .hero-slider { height: 700px; }
+          .slide-maintext { font-size: 3rem; }
+          .slide-subtext { font-size: 1.2rem; }
+        }
         @media (max-width: 768px) {
+          .hero-slider { height: 600px; }
+          .slide-maintext { font-size: 2.2rem; }
+          .slide-subtext { font-size: 1rem; margin-bottom: 10px; }
           .about-section { padding: 80px 0; }
-          .about-container { flex-direction: column; text-align: center; justify-content: center; }
+          .about-container { flex-direction: column; text-align: center; justify-content: center; padding: 0 20px; }
           .about-text { margin: 0 auto; width: 100%; }
-          .about-text h2 { font-size: 1.8rem; word-break: keep-all; }
-          .about-text p { font-size: 1rem; line-height: 1.6; word-break: keep-all; }
+          .about-text h2 { font-size: 1.8rem; }
+          .about-text p { font-size: 1rem; line-height: 1.6; }
           .desktop-only { display: none; }
-          .services-grid { grid-template-columns: 1fr; }
-          .info-cards-grid { grid-template-columns: 1fr; }
-          .slide-maintext { font-size: 2rem; }
+          .services-grid { grid-template-columns: 1fr; border-left: none; }
+          .service-card { border-right: none; padding: 40px 20px; }
+          .service-img-wrap { height: 260px; }
+          .info-cards-grid { grid-template-columns: 1fr; padding: 0 20px; }
+          .info-card { padding: 30px; }
+          .section-title { font-size: 1.8rem; }
+          .slider-nav { padding: 10px 5px; }
         }
       `}</style>
     </>
