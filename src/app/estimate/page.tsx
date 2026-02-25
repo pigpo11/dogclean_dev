@@ -17,6 +17,8 @@ export default function EstimatePage() {
     roomCount: "",
     bathroomCount: "",
     verandaCount: "",
+    dogCount: "",
+    catCount: "",
     notes: ""
   });
 
@@ -151,6 +153,23 @@ export default function EstimatePage() {
                   <label>베란다 개수 *</label>
                   <input type="text" name="verandaCount" required placeholder="베란다 개수" value={formData.verandaCount} onChange={handleChange} />
                 </div>
+
+                <div className="form-group full-width" style={{ marginTop: '20px' }}>
+                  <h3 className="section-subtitle" style={{ fontSize: '1.2rem', marginBottom: '20px' }}>현재 키우고 계신 동물이 있으시다면</h3>
+                  <div className="pet-count-row">
+                    <div className="pet-input-item">
+                      <label>강아지</label>
+                      <input type="text" name="dogCount" placeholder="마리수" value={formData.dogCount} onChange={handleChange} />
+                      <span className="unit">마리</span>
+                    </div>
+                    <div className="pet-input-item">
+                      <label>고양이</label>
+                      <input type="text" name="catCount" placeholder="마리수" value={formData.catCount} onChange={handleChange} />
+                      <span className="unit">마리</span>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="form-group full-width">
                   <label>특이사항</label>
                   <textarea
@@ -373,12 +392,47 @@ export default function EstimatePage() {
           box-shadow: 0 15px 30px rgba(0, 174, 239, 0.3);
           background: #0095cc;
         }
+        .pet-count-row {
+          display: flex;
+          gap: 40px;
+          align-items: center;
+        }
+        .pet-input-item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          flex: 1;
+        }
+        .pet-input-item input {
+          flex: 1;
+          width: auto;
+        }
+        .pet-input-item label {
+          margin-bottom: 0;
+          white-space: nowrap;
+          font-size: 1.1rem;
+          min-width: 60px;
+        }
+        .unit {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #334155;
+          margin-left: 5px;
+          white-space: nowrap;
+        }
         @media (max-width: 768px) {
           form { padding: 30px 20px; }
           .page-header h1 { font-size: 2.2rem; }
           .input-grid { grid-template-columns: 1fr; }
           .form-group.full-width { grid-column: span 1; }
           .check-item { min-width: 100%; }
+          .pet-count-row {
+            flex-direction: column;
+            gap: 15px;
+          }
+          .pet-input-item {
+            width: 100%;
+          }
         }
       `}</style>
     </div>
