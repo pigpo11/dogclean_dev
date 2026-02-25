@@ -1,167 +1,386 @@
 "use client";
 
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function EstimatePage() {
   const [formData, setFormData] = useState({
+    petCleaning: [] as string[],
+    cleaningType: [] as string[],
+    specialCleaning: [] as string[],
+    condition: [] as string[],
     name: "",
     phone: "",
     address: "",
-    area: "",
-    serviceType: "입주청소",
-    message: ""
+    supplyPyeong: "",
+    roomCount: "",
+    bathroomCount: "",
+    verandaCount: "",
+    notes: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleCheckboxChange = (category: keyof typeof formData, value: string) => {
+    setFormData(prev => {
+      const current = prev[category] as string[];
+      if (current.includes(value)) {
+        return { ...prev, [category]: current.filter(item => item !== value) };
+      } else {
+        return { ...prev, [category]: [...current, value] };
+      }
+    });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("견적 문의가 접수되었습니다. 곧 연락드리겠습니다!");
+    alert("견적 문의가 접수되었습니다. 명확한 확인을 위해 곧 담당자가 연락드리겠습니다!");
     console.log(formData);
+  };
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
   };
 
   return (
     <div className="estimate-page">
-      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1554900162-273e057adebb?auto=format&fit=crop&q=80&w=1920)' }}>
+      <div className="page-header">
         <div className="container">
-          <h1>간편 견적</h1>
+          <motion.h1 {...fadeInUp}>간편 견적 문의</motion.h1>
+          <motion.p {...fadeInUp} transition={{ delay: 0.2 }}>정확한 견적을 위해 상세 정보를 입력해주세요.</motion.p>
         </div>
       </div>
 
       <div className="container section">
-        <form className="estimate-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>이름 *</label>
-            <input type="text" name="name" required placeholder="이름을 입력해주세요" onChange={handleChange} />
+        <motion.div
+          className="estimate-card"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="disclaimer-banner">
+            <AlertCircle size={20} />
+            <span>저희는 <strong>부분 청소는 하지 않습니다.</strong> 전체 청소를 전문으로 합니다.</span>
           </div>
 
-          <div className="form-group">
-            <label>연락처 *</label>
-            <input type="tel" name="phone" required placeholder="- 빼고 입력해주세요" onChange={handleChange} />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-section">
+              <h3 className="section-subtitle">전체 청소 견적 항목 선택</h3>
+              <p className="section-hint">해당되는 항목에 모두 체크해 주세요.</p>
 
-          <div className="form-group">
-            <label>주소 *</label>
-            <input type="text" name="address" required placeholder="주소를 입력해주세요" onChange={handleChange} />
-          </div>
+              <div className="checkbox-grid-group">
+                <div className="check-row">
+                  {["강아지집 청소", "고양이집 청소"].map(item => (
+                    <label key={item} className={`check-item ${formData.petCleaning.includes(item) ? 'active' : ''}`}>
+                      <input type="checkbox" checked={formData.petCleaning.includes(item)} onChange={() => handleCheckboxChange('petCleaning', item)} />
+                      <div className="custom-check"></div>
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
 
-          <div className="form-group">
-            <label>평수 *</label>
-            <input type="text" name="area" required placeholder="평수를 입력해주세요" onChange={handleChange} />
-          </div>
+                <div className="check-row">
+                  {["거주청소", "들어갈 집 이사청소", "나갈집 이사청소"].map(item => (
+                    <label key={item} className={`check-item ${formData.cleaningType.includes(item) ? 'active' : ''}`}>
+                      <input type="checkbox" checked={formData.cleaningType.includes(item)} onChange={() => handleCheckboxChange('cleaningType', item)} />
+                      <div className="custom-check"></div>
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
 
-          <div className="form-group">
-            <label>서비스명 *</label>
-            <select name="serviceType" onChange={handleChange}>
-              <option>입주청소</option>
-              <option>이사청소</option>
-              <option>상가청소</option>
-              <option>인테리어청소</option>
-              <option>특수청소</option>
-            </select>
-          </div>
+                <div className="check-row">
+                  {["아기맞이 청소", "무지개 다리 청소", "상업시설 청소"].map(item => (
+                    <label key={item} className={`check-item ${formData.specialCleaning.includes(item) ? 'active' : ''}`}>
+                      <input type="checkbox" checked={formData.specialCleaning.includes(item)} onChange={() => handleCheckboxChange('specialCleaning', item)} />
+                      <div className="custom-check"></div>
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
 
-          <div className="form-group">
-            <label>문의내용</label>
-            <textarea name="message" rows={4} placeholder="원하시는 서비스의 전달사항을 간단히 적어주세요" onChange={handleChange}></textarea>
-          </div>
+                <div className="check-row">
+                  {["털이 심함", "냄새가 심함", "둘다 심함"].map(item => (
+                    <label key={item} className={`check-item ${formData.condition.includes(item) ? 'active' : ''}`}>
+                      <input type="checkbox" checked={formData.condition.includes(item)} onChange={() => handleCheckboxChange('condition', item)} />
+                      <div className="custom-check"></div>
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
 
-          <div className="privacy-check">
-            <label htmlFor="privacy">개인정보취급방침에 동의합니다.</label>
-            <input type="checkbox" id="privacy" required />
-          </div>
+            <div className="form-divider"></div>
 
-          <button type="submit" className="submit-btn">신청하기</button>
-        </form>
+            <div className="form-section">
+              <h3 className="section-subtitle">고객 정보 및 상세 정보</h3>
+
+              <div className="input-grid">
+                <div className="form-group">
+                  <label>성함 *</label>
+                  <input type="text" name="name" required placeholder="성함을 입력해주세요" value={formData.name} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                  <label>연락처 *</label>
+                  <input type="tel" name="phone" required placeholder="연락처를 입력해주세요" value={formData.phone} onChange={handleChange} />
+                </div>
+                <div className="form-group full-width">
+                  <label>청소 하실 곳 주소 (동 까지) *</label>
+                  <input type="text" name="address" required placeholder="예: 서울특별시 광진구 능동" value={formData.address} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                  <label>공급 평수 *</label>
+                  <input type="text" name="supplyPyeong" required placeholder="평수(예: 34평)" value={formData.supplyPyeong} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                  <label>방 개수 *</label>
+                  <input type="text" name="roomCount" required placeholder="방 개수" value={formData.roomCount} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                  <label>화장실 개수 *</label>
+                  <input type="text" name="bathroomCount" required placeholder="화장실 개수" value={formData.bathroomCount} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                  <label>베란다 개수 *</label>
+                  <input type="text" name="verandaCount" required placeholder="베란다 개수" value={formData.verandaCount} onChange={handleChange} />
+                </div>
+                <div className="form-group full-width">
+                  <label>특이사항</label>
+                  <textarea
+                    name="notes"
+                    rows={4}
+                    placeholder="예: 알레르기가 심합니다 / 반려동물 털 박힘이 심합니다 등"
+                    value={formData.notes}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div className="privacy-check">
+              <input type="checkbox" id="privacy" required />
+              <label htmlFor="privacy">개인정보 수집 및 이용 방침에 동의합니다.</label>
+            </div>
+
+            <button type="submit" className="submit-btn">
+              견적 문의 신청하기 <Send size={18} />
+            </button>
+          </form>
+        </motion.div>
       </div>
 
       <style jsx>{`
-                .page-header {
-                    height: 300px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-size: cover;
-                    background-position: center;
-                    color: white;
-                    text-align: center;
-                }
-                .page-header h1 {
-                    font-size: 3rem;
-                    font-weight: 800;
-                }
-                .estimate-form {
-                    max-width: 800px;
-                    margin: 50px auto;
-                    background: #fff;
-                    padding: 60px;
-                    border: 1px solid #eee;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-                    position: relative;
-                    z-index: 10;
-                    border-radius: 20px;
-                }
-                .form-group {
-                    margin-bottom: 25px;
-                }
-                .form-group label {
-                    display: block;
-                    font-weight: 700;
-                    margin-bottom: 10px;
-                    color: #333;
-                }
-                input, select, textarea {
-                    width: 100%;
-                    padding: 12px 15px;
-                    border: 1px solid #ddd;
-                    font-size: 1rem;
-                    outline: none;
-                }
-                input:focus, select:focus, textarea:focus {
-                    border-color: var(--primary);
-                }
-                .privacy-check {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 12px;
-                    margin: 40px 0;
-                }
-                .privacy-check input[type="checkbox"] {
-                    width: auto;
-                    cursor: pointer;
-                }
-                .privacy-check label {
-                    font-size: 0.95rem;
-                    color: #666;
-                    cursor: pointer;
-                    user-select: none;
-                }
-                .submit-btn {
-                    width: 150px;
-                    height: 50px;
-                    margin: 0 auto;
-                    display: block;
-                    background: var(--primary);
-                    color: white;
-                    border: none;
-                    border-radius: 30px;
-                    font-weight: 700;
-                    font-size: 1rem;
-                    cursor: pointer;
-                }
-                @media (max-width: 768px) {
-                    .estimate-form {
-                        margin-top: -50px;
-                        padding: 30px 20px;
-                    }
-                    .page-header h1 { font-size: 2rem; }
-                }
-            `}</style>
+        .estimate-page {
+          background-color: #f8fafc;
+          min-height: 100vh;
+        }
+        .page-header {
+          background: linear-gradient(135deg, var(--primary) 0%, #0088cc 100%);
+          padding: 80px 0;
+          color: white;
+          text-align: center;
+        }
+        .page-header h1 {
+          font-size: 3rem;
+          font-weight: 900;
+          margin-bottom: 15px;
+        }
+        .page-header p {
+          font-size: 1.15rem;
+          opacity: 0.9;
+        }
+        .estimate-card {
+          max-width: 900px;
+          margin: -60px auto 0;
+          background: white;
+          border-radius: 30px;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+          overflow: hidden;
+          padding-bottom: 60px;
+        }
+        .disclaimer-banner {
+          background-color: #fff7ed;
+          color: #c2410c;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          font-size: 1.1rem;
+          border-bottom: 1px solid #ffedd5;
+        }
+        .disclaimer-banner strong {
+          color: #9a3412;
+          text-decoration: underline;
+        }
+        form {
+          padding: 40px 60px;
+        }
+        .form-section {
+          margin-bottom: 40px;
+        }
+        .section-subtitle {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: #1e293b;
+          margin-bottom: 10px;
+        }
+        .section-hint {
+          color: #64748b;
+          font-size: 0.95rem;
+          margin-bottom: 30px;
+        }
+        .checkbox-grid-group {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .check-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        .check-item {
+          flex: 1;
+          min-width: 140px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 15px 20px;
+          border: 2px solid #e2e8f0;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          position: relative;
+        }
+        .check-item input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
+        .custom-check {
+          width: 22px;
+          height: 22px;
+          border: 2px solid #cbd5e1;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          position: relative;
+        }
+        .check-item.active {
+          border-color: var(--primary);
+          background-color: #f0f9ff;
+        }
+        .check-item.active .custom-check {
+          background-color: var(--primary);
+          border-color: var(--primary);
+        }
+        .check-item.active .custom-check::after {
+          content: "";
+          position: absolute;
+          left: 6px;
+          top: 2px;
+          width: 6px;
+          height: 11px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+        .check-item span {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #475569;
+        }
+        .check-item.active span {
+          color: var(--primary);
+        }
+        .form-divider {
+          height: 1px;
+          background: #f1f5f9;
+          margin: 40px 0;
+        }
+        .input-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 30px;
+        }
+        .form-group.full-width {
+          grid-column: span 2;
+        }
+        .form-group label {
+          display: block;
+          font-weight: 700;
+          color: #334155;
+          margin-bottom: 10px;
+          font-size: 0.95rem;
+        }
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+          width: 100%;
+          padding: 15px 20px;
+          border: 2px solid #e2e8f0;
+          border-radius: 12px;
+          font-size: 1rem;
+          transition: border-color 0.2s ease;
+          outline: none;
+        }
+        input:focus,
+        textarea:focus {
+          border-color: var(--primary);
+        }
+        .privacy-check {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          margin: 40px 0;
+        }
+        .privacy-check input {
+          width: 18px;
+          height: 18px;
+        }
+        .privacy-check label {
+          font-size: 0.95rem;
+          color: #64748b;
+          cursor: pointer;
+        }
+        .submit-btn {
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          height: 60px;
+          background: var(--primary);
+          color: white;
+          border-radius: 50px;
+          font-size: 1.1rem;
+          font-weight: 800;
+          box-shadow: 0 10px 20px rgba(0, 174, 239, 0.2);
+          transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 30px rgba(0, 174, 239, 0.3);
+          background: #0095cc;
+        }
+        @media (max-width: 768px) {
+          form { padding: 30px 20px; }
+          .page-header h1 { font-size: 2.2rem; }
+          .input-grid { grid-template-columns: 1fr; }
+          .form-group.full-width { grid-column: span 1; }
+          .check-item { min-width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }

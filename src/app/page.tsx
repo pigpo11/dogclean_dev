@@ -265,7 +265,7 @@ export default function Home() {
                 id: "03",
                 title: "컬비 디테일 케어",
                 desc: "특수 브러시가 장착된 컬비 장비로 벽지 사이사이의 털과 비듬, 진드기, 미세먼지 등 눈에 잘 띄지 않는 오염물까지 꼼꼼히 제거합니다. 벽지, 카펫, 매트리스, 소파 등 집안 구석구석을 빠짐없이 케어합니다.",
-                img: "/Process_3.gif",
+                imgs: ["/Peocess_3_1.mp4", "/Process_3_2.mp4", "/Process_3_3.mp4"],
                 delay: 0.2
               },
               {
@@ -294,16 +294,28 @@ export default function Home() {
                   <h4>{step.title}</h4>
                 </div>
 
-                <div className="step-img-container">
+                <div className={`step-img-container ${step.imgs ? "multi-imgs" : ""}`}>
                   {step.imgs ? (
-                    <div className="imgs-grid">
+                    <div className={`imgs-grid ${step.imgs.length === 3 ? "vertical-stack" : ""}`}>
                       {step.imgs.map((img, i) => (
                         <div key={i} className="grid-img-wrap">
-                          <img
-                            src={img}
-                            alt={`${step.title} ${i + 1}`}
-                            className="grid-img"
-                          />
+                          {img.endsWith('.mp4') ? (
+                            <video
+                              src={img}
+                              className="grid-img"
+                              autoPlay
+                              muted
+                              loop
+                              playsInline
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          ) : (
+                            <img
+                              src={img}
+                              alt={`${step.title} ${i + 1}`}
+                              className="grid-img"
+                            />
+                          )}
                         </div>
                       ))}
                     </div>
@@ -352,8 +364,8 @@ export default function Home() {
                 <div className="service-main-img-box">
                   <img src={item.img} alt={item.name} onError={(e) => (e.currentTarget.src = 'https://placehold.co/400x400?text=' + item.name)} />
                 </div>
-                <div className="service-main-action">
-                  <Link href={`/services/${item.id}`} className="btn-main-detail">자세히보기</Link>
+                <div className="service-main-action" style={{ width: '100%', padding: '0 10px' }}>
+                  <Link href={`/services/${item.id}`} className="btn btn-primary" style={{ width: '100%', fontSize: '0.95rem', padding: '12px 0', borderRadius: '12px' }}>자세히보기</Link>
                 </div>
               </div>
             ))}
@@ -597,6 +609,9 @@ export default function Home() {
           align-items: center;
           justify-content: center;
         }
+        .step-img-container.multi-imgs {
+          aspect-ratio: auto;
+        }
         .single-img {
           width: 100%;
           height: 100%;
@@ -608,12 +623,24 @@ export default function Home() {
           grid-template-columns: repeat(2, 1fr);
           gap: 15px;
           padding: 15px;
+          width: 100%;
+        }
+        .imgs-grid.three-cols {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .imgs-grid.vertical-stack {
+          grid-template-columns: 1fr;
+          max-width: 600px;
+          margin: 0 auto;
         }
         .grid-img-wrap {
           width: 100%;
           aspect-ratio: 16 / 10;
           border-radius: 12px;
           overflow: hidden;
+        }
+        .vertical-stack .grid-img-wrap {
+          aspect-ratio: 16 / 9;
         }
         .grid-img {
           width: 100%;
