@@ -67,6 +67,58 @@ export default function ServiceDetailPage() {
           </div>
         </section>
 
+        {/* Lead Intro Text if exists */}
+        {service.introText && (
+          <section className="section bg-white intro-text-section" style={{ paddingTop: 0 }}>
+            <div className="container" style={{ maxWidth: '1150px' }}>
+              <motion.div
+                {...fadeInUp}
+              >
+                <div className="long-intro-box">
+                  <p style={{ whiteSpace: 'pre-line' }}>
+                    {service.introText}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        )}
+
+        {/* Detailed Description Grid */}
+        {service.longDesc && (
+          <section className="section bg-light-blue long-desc-section">
+            <div className="container" style={{ maxWidth: '1300px' }}>
+              <div className="section-header-centered" style={{ marginBottom: '60px' }}>
+                <h2 className="section-title-sub">
+                  반려동물 특화 <span className="highlight">{service.title}</span>가 필수적인 이유
+                </h2>
+              </div>
+              <div className="long-desc-grid">
+                {service.longDesc.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    className="long-desc-card"
+                    {...fadeInUp}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <div className="card-header">
+                      <span className="card-subtitle">{item.subtitle}</span>
+                      <h3 className="card-title">{item.title}</h3>
+                    </div>
+                    <div className="card-body">
+                      {item.content.split('\n\n').map((para, pIdx) => (
+                        <div key={pIdx} className={`desc-para para-${pIdx}`}>
+                          {para}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Features Grid */}
         <section className="section bg-white features-section-new">
           <div className="container" style={{ maxWidth: '1200px' }}>
@@ -178,30 +230,6 @@ export default function ServiceDetailPage() {
           </div>
         </section>
 
-        {/* Scope & Methods */}
-        <section className="section bg-white scope-section">
-          <div className="container" style={{ maxWidth: '1200px' }}>
-            <div className="section-header-centered">
-              <h2 className="scope-title-custom">
-                {service.title} <span className="blue-highlight">범위와 방법</span>
-              </h2>
-            </div>
-            <div className="scope-grid-custom">
-              {service.scope.map((item, i) => (
-                <motion.div key={i} className="scope-item-custom" {...fadeInUp} transition={{ delay: i * 0.1 }}>
-                  <div className="scope-icon-box-custom">{item.icon}</div>
-                  <div className="scope-content-custom">
-                    <div className="scope-title-wrap-custom">
-                      <h5>{item.title}</h5>
-                      <div className="title-underline"></div>
-                    </div>
-                    <p style={{ whiteSpace: 'pre-line' }}>{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Pricing CTA */}
         <section className="section pricing-custom-section">
@@ -615,6 +643,7 @@ export default function ServiceDetailPage() {
           height: auto;
           display: block;
           transition: filter 0.3s ease;
+          object-fit: contain;
         }
         @media (max-width: 768px) {
           .intro-card { grid-template-columns: 1fr; text-align: center; }
@@ -628,6 +657,167 @@ export default function ServiceDetailPage() {
           .process-step-item { max-width: 100%; width: 100%; }
           .process-timeline-line { display: none; }
           .cta-image-grid { grid-template-columns: 1fr; padding: 0 20px; }
+        }
+        .intro-text-section {
+          padding-bottom: 60px;
+        }
+        .long-intro-box {
+          background: #fdfdfd;
+          padding: 60px 45px;
+          border-top: 2px solid #eee;
+          border-bottom: 2px solid #eee;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+          margin: 0 auto;
+          text-align: center;
+        }
+        .long-intro-box p {
+          white-space: pre-line;
+          font-size: 1.7rem;
+          line-height: 1.6;
+          color: #333;
+          text-align: center;
+          word-break: keep-all;
+          font-weight: 500;
+          letter-spacing: -0.5px;
+        }
+        .bg-light-blue {
+          background-color: #f8fbff;
+        }
+        .long-desc-section {
+          padding-top: 100px;
+          padding-bottom: 120px;
+        }
+        .long-desc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, 380px);
+          justify-content: center;
+          gap: 30px;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        .long-desc-card {
+          background: white;
+          padding: 50px 40px;
+          border-radius: 24px;
+          box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          border: 1px solid #f0f4f8;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          box-sizing: border-box;
+          height: 100%;
+        }
+        .long-desc-card:hover {
+          transform: translateY(-12px);
+          box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+          border-color: var(--primary);
+        }
+        .card-header {
+          margin-bottom: 35px;
+          border-bottom: 3px solid var(--primary);
+          padding-bottom: 25px;
+          text-align: left;
+          min-height: 120px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+        .card-subtitle {
+          display: block;
+          font-size: 1.0rem;
+          color: var(--primary);
+          font-weight: 850;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+          letter-spacing: -0.3px;
+        }
+        .card-title {
+          font-size: 1.35rem;
+          font-weight: 700;
+          color: #000;
+          line-height: 1.4;
+          letter-spacing: -0.5px;
+          word-break: keep-all;
+          overflow-wrap: break-word;
+        }
+        .long-desc-card p, .desc-para {
+          white-space: pre-line;
+          font-size: 1.05rem;
+          line-height: 1.8;
+          color: #333;
+          font-weight: 500;
+          word-break: keep-all;
+          text-align: left;
+        }
+        .desc-para {
+          margin-bottom: 20px;
+        }
+        .desc-para:last-child {
+          margin-bottom: 0;
+        }
+        /* 각 문단별 리드 문장 강조 */
+        .para-0 { color: #111; font-weight: 700 !important; }
+
+        @media (max-width: 1024px) {
+          .long-desc-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          }
+          .long-desc-card {
+            width: 100%;
+          }
+          .desc-para { min-height: auto !important; }
+        }
+        @media (max-width: 768px) {
+          .long-desc-grid {
+            grid-template-columns: 1fr !important;
+            max-width: 450px;
+            margin: 0 auto;
+          }
+          .long-desc-card {
+            padding: 35px 25px;
+            width: 100%;
+            flex: none;
+            height: auto;
+          }
+          .card-header {
+            min-height: auto;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+          }
+          .long-intro-box {
+            padding: 35px 20px;
+          }
+          .long-intro-box p {
+            font-size: 1.35rem !important;
+            font-weight: 500 !important;
+            line-height: 1.6;
+            letter-spacing: -0.3px;
+          }
+          .card-title {
+            font-size: 1.25rem;
+          }
+          .card-subtitle {
+            font-size: 0.95rem;
+          }
+          .long-desc-card p {
+            font-size: 0.95rem;
+          }
+        }
+        .section-title-sub {
+          font-size: 2.3rem;
+          font-weight: 900;
+          color: #111;
+          letter-spacing: -1.2px;
+        }
+        .section-title-sub .highlight {
+          color: var(--primary);
+        }
+        @media (max-width: 768px) {
+          .section-title-sub {
+            font-size: 1.7rem;
+          }
         }
       `}</style>
     </div>

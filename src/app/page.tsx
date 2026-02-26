@@ -615,7 +615,7 @@ export default function Home() {
         .single-img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           display: block;
         }
         .imgs-grid {
@@ -645,7 +645,7 @@ export default function Home() {
         .grid-img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
         }
         .step-desc-box {
           max-width: 720px;
@@ -852,8 +852,8 @@ export default function Home() {
           .scope-main-grid { grid-template-columns: 1fr; }
           .services-main-grid { grid-template-columns: 1fr; }
           .cta-image-grid { grid-template-columns: 1fr; }
-          .img-container { min-height: 300px; }
-          .grid-img { height: 140px; }
+          .step-img-container { min-height: auto; aspect-ratio: auto; }
+          .grid-img { height: auto; }
         }
       `}</style>
     </>
