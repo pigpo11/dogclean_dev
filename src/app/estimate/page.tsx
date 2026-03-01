@@ -343,10 +343,13 @@ export default function EstimatePage() {
           background-color: #f0f9ff;
           color: var(--primary);
           font-weight: 600;
+          justify-content: center;
+          text-align: center;
         }
         .mungclean-content {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
+          justify-content: center;
           gap: 10px;
         }
         .check-icon {
@@ -372,8 +375,8 @@ export default function EstimatePage() {
           }
           .cell {
             padding: 15px;
-            justify-content: flex-start;
-            text-align: left;
+            justify-content: center;
+            text-align: center;
           }
           .cell.label {
             border-right: none;
