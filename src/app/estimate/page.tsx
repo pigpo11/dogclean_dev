@@ -387,12 +387,12 @@ export default function EstimatePage() {
             color: #94a3b8;
           }
           .cell.general::before {
-            content: "일반: ";
+            content: "일반 청소업체: ";
             font-weight: 700;
             margin-right: 8px;
           }
           .cell.mungclean::before {
-            content: "명크린: ";
+            content: "멍크린: ";
             font-weight: 700;
             margin-right: 8px;
           }
