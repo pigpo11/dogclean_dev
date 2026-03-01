@@ -79,7 +79,7 @@ export default function EstimatePage() {
 
               {[
                 { label: "청소 시간", general: "오전, 오후 중 한 타임 (대략 4-5시간)", mungclean: "오전 8시 시작 (하루 10-11시간 집중 청소)", highlight: true },
-                { label: "전문 인력", general: "팀장만 한국인, 팀원은 외국인 (대다수 불법체류자)", mungclean: "전원 숙련된 한국인 청소 전문가", highlight: true },
+                { label: "전문 인력", general: "팀장만 한국인, 팀원은 외국인\n(대다수 불법체류자)", mungclean: "전원 숙련된 한국인 청소 전문가", highlight: true },
                 { label: "전문 장비", general: "간단한 기본 청소 도구", mungclean: "컬비, 미코플러 등 고가의 프리미엄 장비", highlight: true },
                 { label: "살균 소독", general: "짧은 시간 내 시늉만 하는 스팀 케어", mungclean: "오존 산화 장비 전 공간 살균 + 고압 스팀", highlight: true },
                 { label: "냄새 제거", general: "독한 향의 세제로 냄새를 덮는 수준", mungclean: "벽지 속 각질/미세먼지 제거로 근본적 탈취", highlight: true },
@@ -338,6 +338,7 @@ export default function EstimatePage() {
           border-right: 1px solid #f1f5f9;
           justify-content: center;
           text-align: center;
+          white-space: pre-wrap;
         }
         .cell.mungclean {
           background-color: #f0f9ff;
@@ -393,11 +394,13 @@ export default function EstimatePage() {
             content: "일반 청소업체: ";
             font-weight: 700;
             margin-right: 8px;
+            white-space: nowrap;
           }
           .cell.mungclean::before {
             content: "멍크린: ";
             font-weight: 700;
             margin-right: 8px;
+            white-space: nowrap;
           }
         }
 
