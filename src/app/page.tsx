@@ -265,7 +265,7 @@ export default function Home() {
                 id: "03",
                 title: "컬비 디테일 케어",
                 desc: "특수 브러시가 장착된 컬비 장비로 벽지 사이사이의 털과 비듬, 진드기, 미세먼지 등 눈에 잘 띄지 않는 오염물까지 꼼꼼히 제거합니다. 벽지, 카펫, 매트리스, 소파 등 집안 구석구석을 빠짐없이 케어합니다.",
-                imgs: ["/Peocess_3_1.mp4", "/Process_3_2.mp4", "/Process_3_3.mp4"],
+                imgs: ["/Process_3_1.mp4", "/Process_3_2.mp4", "/Process_3_3.mp4"],
                 delay: 0.2
               },
               {
@@ -307,8 +307,11 @@ export default function Home() {
                               muted
                               loop
                               playsInline
+                              preload="auto"
                               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
+                            >
+                              <source src={img} type="video/mp4" />
+                            </video>
                           ) : (
                             <img
                               src={img}
