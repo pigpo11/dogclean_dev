@@ -301,14 +301,13 @@ export default function Home() {
                         <div key={i} className="grid-img-wrap">
                           {img.endsWith('.mp4') ? (
                             <video
-                              src={img}
                               className="grid-img"
                               autoPlay
                               muted
                               loop
                               playsInline
                               preload="auto"
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#f8f8f8' }}
                             >
                               <source src={img} type="video/mp4" />
                             </video>
