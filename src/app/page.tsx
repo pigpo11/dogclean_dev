@@ -21,7 +21,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -299,18 +299,32 @@ export default function Home() {
                     <div className={`imgs-grid ${step.imgs.length === 3 ? "vertical-stack" : ""}`}>
                       {step.imgs.map((img, i) => (
                         <div key={i} className="grid-img-wrap">
-                          {img.endsWith('.mp4') ? (
-                            <video
-                              className="grid-img"
-                              autoPlay
-                              muted
-                              loop
-                              playsInline
-                              preload="auto"
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#f8f8f8' }}
-                            >
-                              <source src={img} type="video/mp4" />
-                            </video>
+                          {img.toLowerCase().endsWith('.mp4') ? (
+                            <div className="video-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                              <video
+                                className="grid-img"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="auto"
+                                src={img}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#f8f8f8' }}
+                                onError={(e) => {
+                                  console.error("Video loading error:", img, e);
+                                  const target = e.target as HTMLVideoElement;
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    const errorMsg = document.createElement("div");
+                                    errorMsg.style.cssText = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#666; font-size:0.8rem; text-align:center; padding:10px;";
+                                    errorMsg.innerHTML = "영상을 재생할 수 없습니다.<br/>(코덱 또는 브라우저 미지원)";
+                                    parent.appendChild(errorMsg);
+                                  }
+                                }}
+                              >
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
                           ) : (
                             <img
                               src={img}
@@ -346,6 +360,89 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Comparison Table Section */}
+          <div className="comparison-wrap" style={{ marginTop: '120px', marginBottom: '120px' }}>
+            <div className="section-header" style={{ textAlign: 'center', marginBottom: '80px' }}>
+              <h3 style={{ fontSize: '2.2rem', fontWeight: 900, color: '#111', wordBreak: 'keep-all' }}>
+                멍크린과 <span style={{ color: 'var(--primary)' }}>일반 입주청소 업체</span>를 비교해볼까요?
+              </h3>
+            </div>
+
+            <div className="comparison-table-container">
+              <table className="comparison-table">
+                <thead>
+                  <tr>
+                    <th className="row-label">구분</th>
+                    <th className="other-company">일반 입주청소 업체</th>
+                    <th className="mungclean-company">멍크린</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="row-label">청소 시간</td>
+                    <td>오전, 오후 중 한 타임<br />(대략 4-5시간 청소)</td>
+                    <td className="highlight">오전 8시 시작<br />(하루 10-11시간 청소)</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">인력</td>
+                    <td>팀장만 한국인 팀원은 외국인</td>
+                    <td className="highlight">전원 한국인 청소 전문가</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">장비</td>
+                    <td>간단한 청소 도구</td>
+                    <td className="highlight">고가의 전문 장비</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">살균소독</td>
+                    <td>스팀을 사용한다고 말 하지만 실제는 짧은 청소시간에 쫓겨 시늉만 하는 수준</td>
+                    <td className="highlight">오존산화 장비로 집안 전체 확실한 살균, 고압 스팀으로 주방 및 화장실 살균</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">냄새제거</td>
+                    <td>향 짙은 세제 사용으로 잠시 냄새를 덮는 수준</td>
+                    <td className="highlight">전문장비로 벽지 속 동물의 각질 및 미세먼지까지 제거하여 냄새의 근본을 제거</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">세제</td>
+                    <td>말로만 친환경 세제, 실제론 퐁퐁 수준의 세제</td>
+                    <td className="highlight">수입산 친환경 세제</td>
+                  </tr>
+                  <tr>
+                    <td className="row-label">추가요금</td>
+                    <td>현장에서 추가요금 요청O</td>
+                    <td className="highlight">현장에서 추가요금 요청X</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="comparison-footer-text" style={{ marginTop: '100px', textAlign: 'center' }}>
+              <div className="footer-top-group">
+                <p className="footer-p main-quote">
+                  저희는 싸지 않습니다, 하지만 청소 퀄리티와 소요 시간 대비 비싸지 않습니다
+                </p>
+                <p className="footer-p sub-desc">
+                  일반적인 먼지와 때를 제거하는 청소와 털과 냄새, 각종 세균제거등<br />
+                  확실한 청소를 원하신다면 언제든 연락주시면 친절히 상담드립니다 :)
+                </p>
+              </div>
+
+              <div className="footer-middle-group" style={{ margin: '80px 0' }}>
+                <p className="pink-quote">잘하는건 잘하는 업체에 맡기시는게 맞습니다!!!</p>
+              </div>
+
+              <div className="footer-bottom-group" style={{ marginTop: '80px' }}>
+                <p className="gray-quote">사람이 하는 일 100% 완벽은 힘듭니다!! 하지만</p>
+                <p className="final-quote">
+                  <span className="green">저희는 </span>
+                  <span className="red">100% </span>
+                  <span className="green">결과를 위해 노력 합니다.!!</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -797,6 +894,89 @@ export default function Home() {
           padding-left: 18px;
           line-height: 1.6;
           word-break: keep-all;
+        }
+
+        /* Comparison Table Styles */
+        .comparison-table-container {
+          overflow-x: auto;
+          background: white;
+          border-radius: 20px;
+          box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+          padding: 20px;
+        }
+        .comparison-table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 800px;
+        }
+        .comparison-table th, .comparison-table td {
+          padding: 25px 20px;
+          border: 1px solid #f0f0f0;
+          text-align: center;
+          font-size: 1.05rem;
+          word-break: keep-all;
+          line-height: 1.6;
+        }
+        .comparison-table th {
+          background: #fcfcfc;
+          font-weight: 800;
+          color: #333;
+          font-size: 1.2rem;
+        }
+        .comparison-table .row-label {
+          width: 15%;
+          background: #f8f8f8;
+          font-weight: 700;
+          color: #444;
+          text-align: center;
+        }
+        .comparison-table .other-company {
+          width: 42.5%;
+        }
+        .comparison-table .mungclean-company {
+          width: 42.5%;
+          background: #fffef0;
+          color: var(--primary);
+        }
+        .comparison-table td.highlight {
+          background: #fffef0;
+          color: #111;
+          font-weight: 600;
+        }
+        
+        .comparison-footer-text .footer-p {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: #333;
+          margin-bottom: 20px;
+          line-height: 1.6;
+          word-break: keep-all;
+        }
+        .comparison-footer-text .sub-desc {
+          font-size: 1.15rem;
+          font-weight: 500;
+          color: #666;
+          margin-bottom: 40px;
+        }
+        .special-quotes p {
+          margin-bottom: 10px;
+          font-weight: 800;
+          font-size: 1.4rem;
+        }
+        .pink-quote { color: #ff3399; margin-bottom: 0; }
+        .gray-quote { color: #888; font-size: 1.2rem !important; margin-bottom: 10px; }
+        .final-quote { font-size: 1.8rem !important; }
+        .final-quote .green { color: #2ecc71; }
+        .final-quote .red { color: #e74c3c; }
+
+        @media (max-width: 768px) {
+          .comparison-table th, .comparison-table td {
+            padding: 15px 10px;
+            font-size: 0.95rem;
+          }
+          .comparison-table th { font-size: 1rem; }
+          .special-quotes p { font-size: 1.2rem !important; }
+          .final-quote { font-size: 1.5rem !important; }
         }
         .scope-list li::before {
           content: "";
