@@ -23,6 +23,7 @@ import {
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
@@ -265,7 +266,7 @@ export default function Home() {
                 id: "03",
                 title: "컬비 디테일 케어",
                 desc: "특수 브러시가 장착된 컬비 장비로 벽지 사이사이의 털과 비듬, 진드기, 미세먼지 등 눈에 잘 띄지 않는 오염물까지 꼼꼼히 제거합니다. 벽지, 카펫, 매트리스, 소파 등 집안 구석구석을 빠짐없이 케어합니다.",
-                imgs: ["/Process_3_1.mp4", "/Process_3_2.mp4", "/Process_3_3.mp4"],
+                imgs: ["/Process_3_1.webp", "/Process_3_2.webp", "/Process_3_3.webp"],
                 delay: 0.2
               },
               {
@@ -299,32 +300,24 @@ export default function Home() {
                     <div className={`imgs-grid ${step.imgs.length === 3 ? "vertical-stack" : ""}`}>
                       {step.imgs.map((img, i) => (
                         <div key={i} className="grid-img-wrap">
-                          {img.toLowerCase().endsWith('.mp4') ? (
-                            <div className="video-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
-                              <video
-                                className="grid-img"
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                preload="auto"
-                                src={img}
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#f8f8f8' }}
-                                onError={(e) => {
-                                  console.error("Video loading error:", img, e);
-                                  const target = e.target as HTMLVideoElement;
-                                  const parent = target.parentElement;
-                                  if (parent) {
-                                    const errorMsg = document.createElement("div");
-                                    errorMsg.style.cssText = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#666; font-size:0.8rem; text-align:center; padding:10px;";
-                                    errorMsg.innerHTML = "영상을 재생할 수 없습니다.<br/>(코덱 또는 브라우저 미지원)";
-                                    parent.appendChild(errorMsg);
-                                  }
-                                }}
-                              >
-                                Your browser does not support the video tag.
-                              </video>
-                            </div>
+                          {img.toLowerCase().endsWith('.mp4') || img.toLowerCase().endsWith('.webp') || img.toLowerCase().endsWith('.gif') ? (
+                            <img
+                              src={img}
+                              alt={`${step.title} ${i + 1}`}
+                              className="grid-img"
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#f8f8f8' }}
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  const errorMsg = document.createElement("div");
+                                  errorMsg.style.cssText = "position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#666; font-size:0.8rem; text-align:center; padding:10px;";
+                                  errorMsg.innerHTML = "이미지를 불러올 수 없습니다.";
+                                  parent.appendChild(errorMsg);
+                                }
+                              }}
+                            />
                           ) : (
                             <img
                               src={img}
@@ -419,30 +412,7 @@ export default function Home() {
               </table>
             </div>
 
-            <div className="comparison-footer-text" style={{ marginTop: '100px', textAlign: 'center' }}>
-              <div className="footer-top-group">
-                <p className="footer-p main-quote">
-                  저희는 싸지 않습니다, 하지만 청소 퀄리티와 소요 시간 대비 비싸지 않습니다
-                </p>
-                <p className="footer-p sub-desc">
-                  일반적인 먼지와 때를 제거하는 청소와 털과 냄새, 각종 세균제거등<br />
-                  확실한 청소를 원하신다면 언제든 연락주시면 친절히 상담드립니다 :)
-                </p>
-              </div>
 
-              <div className="footer-middle-group" style={{ margin: '80px 0' }}>
-                <p className="pink-quote">잘하는건 잘하는 업체에 맡기시는게 맞습니다!!!</p>
-              </div>
-
-              <div className="footer-bottom-group" style={{ marginTop: '80px' }}>
-                <p className="gray-quote">사람이 하는 일 100% 완벽은 힘듭니다!! 하지만</p>
-                <p className="final-quote">
-                  <span className="green">저희는 </span>
-                  <span className="red">100% </span>
-                  <span className="green">결과를 위해 노력 합니다.!!</span>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -944,30 +914,7 @@ export default function Home() {
           font-weight: 600;
         }
         
-        .comparison-footer-text .footer-p {
-          font-size: 1.3rem;
-          font-weight: 700;
-          color: #333;
-          margin-bottom: 20px;
-          line-height: 1.6;
-          word-break: keep-all;
-        }
-        .comparison-footer-text .sub-desc {
-          font-size: 1.15rem;
-          font-weight: 500;
-          color: #666;
-          margin-bottom: 40px;
-        }
-        .special-quotes p {
-          margin-bottom: 10px;
-          font-weight: 800;
-          font-size: 1.4rem;
-        }
-        .pink-quote { color: #ff3399; margin-bottom: 0; }
-        .gray-quote { color: #888; font-size: 1.2rem !important; margin-bottom: 10px; }
-        .final-quote { font-size: 1.8rem !important; }
-        .final-quote .green { color: #2ecc71; }
-        .final-quote .red { color: #e74c3c; }
+
 
         @media (max-width: 768px) {
           .comparison-table th, .comparison-table td {
@@ -975,8 +922,7 @@ export default function Home() {
             font-size: 0.95rem;
           }
           .comparison-table th { font-size: 1rem; }
-          .special-quotes p { font-size: 1.2rem !important; }
-          .final-quote { font-size: 1.5rem !important; }
+
         }
         .scope-list li::before {
           content: "";
