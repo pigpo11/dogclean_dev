@@ -7,8 +7,6 @@ import { Phone, Menu, X, ChevronDown } from "lucide-react";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,34 +34,18 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="desktop-nav">
           <ul className="nav-list">
-            <li
-              className="nav-item-dropdown"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => setIsServicesOpen(false)}
-            >
-              <Link href="/#services-list" className="nav-link">
-                전문 청소 소개 <ChevronDown size={16} style={{ marginLeft: 4, verticalAlign: 'middle', transition: 'transform 0.3s', transform: isServicesOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
-              </Link>
-              {isServicesOpen && (
-                <div className="dropdown-menu">
-                  <div className="dropdown-menu-inner">
-                    {serviceSubItems.map((sub) => (
-                      <Link key={sub.name} href={sub.href} className="dropdown-item">
-                        {sub.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </li>
+            {serviceSubItems.map((sub) => (
+              <li key={sub.name}>
+                <Link href={sub.href} className="nav-link">
+                  {sub.name}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link href="/reviews" className="nav-link">청소후기</Link>
             </li>
             <li>
               <Link href="/estimate" className="nav-link">간편 견적</Link>
-            </li>
-            <li>
-              <Link href="/payment" className="nav-link highlight">결제하기</Link>
             </li>
           </ul>
         </nav>
@@ -84,25 +66,13 @@ export default function Header() {
         <div className="mobile-menu">
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">
-              <li>
-                <button
-                  className="mobile-nav-link mobile-dropdown-toggle"
-                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                >
-                  전문 청소 소개 <ChevronDown size={20} style={{ transition: 'transform 0.3s', transform: isMobileServicesOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
-                </button>
-                {isMobileServicesOpen && (
-                  <ul className="mobile-sub-list">
-                    {serviceSubItems.map((sub) => (
-                      <li key={sub.name}>
-                        <Link href={sub.href} className="mobile-sub-link" onClick={() => setIsMobileMenuOpen(false)}>
-                          {sub.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
+              {serviceSubItems.map((sub) => (
+                <li key={sub.name}>
+                  <Link href={sub.href} className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                    {sub.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/reviews" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                   청소후기
@@ -111,11 +81,6 @@ export default function Header() {
               <li>
                 <Link href="/estimate" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                   간편 견적
-                </Link>
-              </li>
-              <li>
-                <Link href="/payment" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  결제하기
                 </Link>
               </li>
               <li>
@@ -170,7 +135,7 @@ export default function Header() {
         }
         .nav-list {
           display: flex;
-          gap: 40px;
+          gap: 20px;
           align-items: center;
         }
         .nav-link {
@@ -180,84 +145,12 @@ export default function Header() {
           transition: color 0.3s ease;
           display: inline-flex;
           align-items: center;
+          white-space: nowrap;
         }
         .nav-link:hover {
           color: var(--primary);
         }
-        .nav-link.highlight {
-          background: var(--primary);
-          color: white;
-          padding: 8px 20px;
-          border-radius: 50px;
-          transition: all 0.3s;
-        }
-        .nav-link.highlight:hover {
-          background: var(--primary-dark);
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
 
-        /* Dropdown */
-        .nav-item-dropdown {
-          position: relative;
-        }
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          margin-top: 0;
-          padding-top: 15px;
-          background: transparent;
-          z-index: 1001;
-          width: 190px;
-        }
-        .dropdown-menu-inner {
-          background: var(--primary);
-          border-radius: 12px;
-          padding: 10px 0;
-          min-width: 220px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-          animation: dropdownFadeIn 0.2s ease forwards;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          position: relative;
-        }
-        .dropdown-menu-inner::before {
-          content: '';
-          position: absolute;
-          top: -8px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 0;
-          height: 0;
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent;
-          border-bottom: 8px solid var(--primary);
-        }
-        .dropdown-item {
-          display: block;
-          padding: 8px 25px;
-          color: #fff;
-          font-size: 0.95rem;
-          font-weight: 700;
-          text-align: center;
-          transition: background 0.2s;
-          width: 100%;
-          white-space: nowrap;
-          border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-        .dropdown-item:last-child {
-          border-bottom: none;
-        }
-        .dropdown-item:hover {
-          background: rgba(255,255,255,0.15);
-        }
-        @keyframes dropdownFadeIn {
-          from { opacity: 0; transform: translateY(5px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
 
         .header-actions {
           display: flex;

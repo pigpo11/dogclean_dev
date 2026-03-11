@@ -355,65 +355,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Comparison Table Section */}
-          <div className="comparison-wrap" style={{ marginTop: '120px', marginBottom: '120px' }}>
-            <div className="section-header" style={{ textAlign: 'center', marginBottom: '80px' }}>
-              <h3 style={{ fontSize: '2.2rem', fontWeight: 900, color: '#111', wordBreak: 'keep-all' }}>
-                멍크린과 <span style={{ color: 'var(--primary)' }}>일반 입주청소 업체</span>를 비교해볼까요?
-              </h3>
-            </div>
-
-            <div className="comparison-table-container">
-              <table className="comparison-table">
-                <thead>
-                  <tr>
-                    <th className="row-label">구분</th>
-                    <th className="other-company">일반 입주청소 업체</th>
-                    <th className="mungclean-company">멍크린</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="row-label">청소 시간</td>
-                    <td>오전, 오후 중 한 타임<br />(대략 4-5시간 청소)</td>
-                    <td className="highlight">오전 8시 시작<br />(하루 10-11시간 청소)</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">인력</td>
-                    <td>팀장만 한국인 팀원은 외국인</td>
-                    <td className="highlight">전원 한국인 청소 전문가</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">장비</td>
-                    <td>간단한 청소 도구</td>
-                    <td className="highlight">고가의 전문 장비</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">살균소독</td>
-                    <td>스팀을 사용한다고 말 하지만 실제는 짧은 청소시간에 쫓겨 시늉만 하는 수준</td>
-                    <td className="highlight">오존산화 장비로 집안 전체 확실한 살균, 고압 스팀으로 주방 및 화장실 살균</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">냄새제거</td>
-                    <td>향 짙은 세제 사용으로 잠시 냄새를 덮는 수준</td>
-                    <td className="highlight">전문장비로 벽지 속 동물의 각질 및 미세먼지까지 제거하여 냄새의 근본을 제거</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">세제</td>
-                    <td>말로만 친환경 세제, 실제론 퐁퐁 수준의 세제</td>
-                    <td className="highlight">수입산 친환경 세제</td>
-                  </tr>
-                  <tr>
-                    <td className="row-label">추가요금</td>
-                    <td>현장에서 추가요금 요청O</td>
-                    <td className="highlight">현장에서 추가요금 요청X</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-
-          </div>
         </div>
       </section>
 
@@ -866,64 +807,9 @@ export default function Home() {
           word-break: keep-all;
         }
 
-        /* Comparison Table Styles */
-        .comparison-table-container {
-          overflow-x: auto;
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-          padding: 20px;
-        }
-        .comparison-table {
-          width: 100%;
-          border-collapse: collapse;
-          min-width: 800px;
-        }
-        .comparison-table th, .comparison-table td {
-          padding: 25px 20px;
-          border: 1px solid #f0f0f0;
-          text-align: center;
-          font-size: 1.05rem;
-          word-break: keep-all;
-          line-height: 1.6;
-        }
-        .comparison-table th {
-          background: #fcfcfc;
-          font-weight: 800;
-          color: #333;
-          font-size: 1.2rem;
-        }
-        .comparison-table .row-label {
-          width: 15%;
-          background: #f8f8f8;
-          font-weight: 700;
-          color: #444;
-          text-align: center;
-        }
-        .comparison-table .other-company {
-          width: 42.5%;
-        }
-        .comparison-table .mungclean-company {
-          width: 42.5%;
-          background: #fffef0;
-          color: var(--primary);
-        }
-        .comparison-table td.highlight {
-          background: #fffef0;
-          color: #111;
-          font-weight: 600;
-        }
         
 
 
-        @media (max-width: 768px) {
-          .comparison-table th, .comparison-table td {
-            padding: 15px 10px;
-            font-size: 0.95rem;
-          }
-          .comparison-table th { font-size: 1rem; }
-
-        }
         .scope-list li::before {
           content: "";
           position: absolute;

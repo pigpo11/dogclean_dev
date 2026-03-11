@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@prisma/client": "^7.4.0",
-    "@tosspayments/payment-sdk": "^1.9.2",
-    "@tosspayments/tosspayments-sdk": "^2.5.0",
     "axios": "^1.13.5",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.564.0",
