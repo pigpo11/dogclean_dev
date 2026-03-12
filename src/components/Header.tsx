@@ -17,11 +17,12 @@ export default function Header() {
   }, []);
 
   const serviceSubItems = [
+    { name: "전문 청소 소개", href: "/" },
     { name: "이사청소", href: "/services/moving" },
     { name: "거주청소", href: "/services/residential" },
     { name: "아기맞이청소", href: "/services/baby" },
     { name: "무지개다리 청소", href: "/services/rainbow" },
-    { name: "상가청소", href: "/services/commercial" },
+    { name: "상업시설청소", href: "/services/commercial" },
   ];
 
   return (
@@ -42,10 +43,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="/reviews" className="nav-link">청소후기</Link>
-            </li>
-            <li>
-              <Link href="/estimate" className="nav-link">간편 견적</Link>
+              <Link href="/estimate" className="nav-estimate-btn">간편 견적</Link>
             </li>
           </ul>
         </nav>
@@ -74,12 +72,7 @@ export default function Header() {
                 </li>
               ))}
               <li>
-                <Link href="/reviews" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  청소후기
-                </Link>
-              </li>
-              <li>
-                <Link href="/estimate" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href="/estimate" className="mobile-nav-estimate-btn" onClick={() => setIsMobileMenuOpen(false)}>
                   간편 견적
                 </Link>
               </li>
@@ -150,6 +143,25 @@ export default function Header() {
         .nav-link:hover {
           color: var(--primary);
         }
+        .nav-estimate-btn {
+          background-color: #00BFFF;
+          color: #ffffff;
+          padding: 10px 24px;
+          border-radius: 50px;
+          font-weight: 800;
+          font-size: 1.1rem;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          white-space: nowrap;
+          box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
+        }
+        .nav-estimate-btn:hover {
+          background-color: #009ACD;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(0, 191, 255, 0.4);
+          color: #ffffff;
+        }
 
 
         .header-actions {
@@ -193,6 +205,18 @@ export default function Header() {
           color: #333;
           text-align: left;
           width: 100%;
+        }
+        .mobile-nav-estimate-btn {
+          display: block;
+          background-color: #00BFFF;
+          color: #ffffff;
+          padding: 15px 25px;
+          border-radius: 50px;
+          font-size: 1.4rem;
+          font-weight: 800;
+          text-align: center;
+          margin-top: 10px;
+          box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
         }
         .mobile-dropdown-toggle {
           display: flex;

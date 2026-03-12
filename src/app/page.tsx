@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import AllInOneShowcase from "@/components/AllInOneShowcase";
 
 
 export default function Home() {
@@ -96,6 +97,9 @@ export default function Home() {
           <ChevronRight size={40} color="white" />
         </button>
       </section>
+      
+      {/* 2. All-in-One Showcase */}
+      <AllInOneShowcase />
 
 
       {/* 3. Why Pet Care Section */}
