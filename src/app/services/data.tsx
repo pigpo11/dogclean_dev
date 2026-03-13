@@ -223,7 +223,7 @@ export const servicesData = [
     },
     {
         id: "commercial",
-        title: "상가청소",
+        title: "상업시설 청소",
         homepageDesc: "\"성공을 부르는 청결한 비즈니스 공간!\"",
         img: "/services/commercial.png",
         subtitle: "매출을 올리는 깨끗한 첫인상, 성공의 파트너!",

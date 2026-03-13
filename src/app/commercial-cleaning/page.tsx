@@ -10,7 +10,7 @@ const services = [
     subtitle: "쾌적한 카페, 행복한 반려동물",
     icon: <Coffee size={32} />,
     img: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1000",
-    desc: "다수의 반려동물이 이용하는 애견카페는 일반 상가보다 위생 관리가 훨씬 까다롭습니다. 영업 종료 후 또는 정기적인 전문 청소를 통해 고객과 반려동물 모두가 안심할 수 있는 환경을 유지합니다.",
+    desc: "다수의 반려동물이 이용하는 애견카페는 일반 상업시설보다 위생 관리가 훨씬 까다롭습니다. 영업 종료 후 또는 정기적인 전문 청소를 통해 고객과 반려동물 모두가 안심할 수 있는 환경을 유지합니다.",
     features: ["바닥 심층 세척 및 살균", "소파 및 쿠션 정밀 케어", "반려동물 악취 근본 제거", "주방 및 공용공간 위생 관리"]
   },
   {
@@ -36,7 +36,7 @@ const services = [
 export default function CommercialCleaningPage() {
   return (
     <div className="container section">
-      <h1 className="section-title">상가청소 서비스</h1>
+      <h1 className="section-title">상업시설 청소 서비스</h1>
       <p className="page-desc">전문적인 위생 관리가 필요한 반려동물 관련 사업장을 위한 맞춤형 클리닝 솔루션입니다.</p>
 
       <div className="services-list">

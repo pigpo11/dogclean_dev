@@ -22,7 +22,7 @@ export default function Header() {
     { name: "거주청소", href: "/services/residential" },
     { name: "아기맞이청소", href: "/services/baby" },
     { name: "무지개다리 청소", href: "/services/rainbow" },
-    { name: "상업시설청소", href: "/services/commercial" },
+    { name: "상업시설 청소", href: "/services/commercial" },
   ];
 
   return (

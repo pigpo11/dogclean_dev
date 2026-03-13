@@ -64,7 +64,7 @@ export default function Home() {
     { id: "residential", name: "거주청소", desc: "우리 가족의 건강을 지키는\n프리미엄 케어!", img: "/services/residential.png" },
     { id: "baby", name: "아기맞이청소", desc: "면역력 약한 아기를 위한\n안심 살균!", img: "/services/baby.png" },
     { id: "rainbow", name: "무지개다리 청소", desc: "냄새와 세균 걱정 없는\n쾌적한 펫 환경!", img: "/services/rainbow.png" },
-    { id: "commercial", name: "상가청소", desc: "성공을 부르는 청결한\n비즈니스 공간!", img: "/services/commercial.png" },
+    { id: "commercial", name: "상업시설 청소", desc: "성공을 부르는 청결한\n비즈니스 공간!", img: "/services/commercial.png" },
   ];
 
   return (
