@@ -17,7 +17,7 @@ export default function Header() {
   }, []);
 
   const serviceSubItems = [
-    { name: "전문 청소 소개", href: "/" },
+    { name: "멍크린 소개", href: "/" },
     { name: "이사청소", href: "/services/moving" },
     { name: "거주청소", href: "/services/residential" },
     { name: "아기맞이청소", href: "/services/baby" },
@@ -37,7 +37,7 @@ export default function Header() {
           <ul className="nav-list">
             {serviceSubItems.map((sub) => (
               <li key={sub.name}>
-                <Link href={sub.href} className="nav-link">
+                <Link href={sub.href} className={`nav-link ${sub.name === "멍크린 소개" ? "sky-blue-text" : ""}`}>
                   {sub.name}
                 </Link>
               </li>
@@ -66,7 +66,7 @@ export default function Header() {
             <ul className="mobile-nav-list">
               {serviceSubItems.map((sub) => (
                 <li key={sub.name}>
-                  <Link href={sub.href} className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link href={sub.href} className={`mobile-nav-link ${sub.name === "멍크린 소개" ? "sky-blue-text" : ""}`} onClick={() => setIsMobileMenuOpen(false)}>
                     {sub.name}
                   </Link>
                 </li>
@@ -142,6 +142,9 @@ export default function Header() {
         }
         .nav-link:hover {
           color: var(--primary);
+        }
+        .sky-blue-text {
+          color: #00BFFF !important;
         }
         .nav-estimate-btn {
           background-color: #00BFFF;

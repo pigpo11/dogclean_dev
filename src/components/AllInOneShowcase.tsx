@@ -294,6 +294,11 @@ export default function AllInOneShowcase() {
           .aio-main-title {
             font-size: 2.2rem;
           }
+          .aio-badge {
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            white-space: nowrap;
+          }
         }
       `}</style>
     </section>
